@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Family Priorities & Decision Criteria</title>
+<style>
+:root{--navy:#03123d;--blue:#05206e;--gold:#c7ae6a;--gold-light:#d5c28f;--ink:#172033;--muted:#65708a;--paper:#fff;--soft:#f5f3ed;--line:#e4e7ee;--success:#315b46}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,Arial,Helvetica,sans-serif;color:var(--ink);background:#eef0f5;line-height:1.55}
+.shell{max-width:1040px;margin:32px auto;background:var(--paper);min-height:90vh;box-shadow:0 18px 55px rgba(3,18,61,.12)}
+.cover{min-height:600px;padding:70px 72px 52px;background:radial-gradient(circle at 82% 18%,rgba(199,174,106,.20),transparent 24%),linear-gradient(150deg,var(--navy),#071b54 72%,#0b286d);color:#fff;display:flex;flex-direction:column;justify-content:space-between}
+.kicker{text-transform:uppercase;letter-spacing:.18em;font-size:.78rem;font-weight:700;color:var(--gold-light)}
+.cover h1{max-width:760px;font-family:Georgia,'Times New Roman',serif;font-size:clamp(2.7rem,6vw,5rem);line-height:1;margin:22px 0 24px;font-weight:500}
+.cover .intro{max-width:720px;font-size:1.1rem;color:#e8ebf5}
+.cover-card{margin-top:40px;max-width:720px;border-left:3px solid var(--gold);padding:4px 0 4px 22px;color:#f6f2e7}
+.cover-footer{display:flex;justify-content:space-between;gap:20px;color:#cdd5e9;font-size:.9rem}
+main{padding-bottom:60px}
+.progress-wrap{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:18px 56px 14px}
+.progress-row{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:9px}
+.progress-label{font-weight:700;color:var(--navy)} .progress-count{font-size:.9rem;color:var(--muted)}
+.progress-track{height:7px;border-radius:99px;background:#e8ebf1;overflow:hidden}
+.progress-bar{height:100%;width:14.3%;background:linear-gradient(90deg,var(--gold),#b89945);transition:width .25s ease}
+.form-area{padding:46px 56px 10px}.section{display:none}.section.active{display:block}
+.section-number{color:var(--gold);font-weight:800;letter-spacing:.15em;text-transform:uppercase;font-size:.8rem}
+h2{font-family:Georgia,'Times New Roman',serif;font-size:2.35rem;color:var(--navy);margin:8px 0 18px;font-weight:500}
+h3{color:var(--navy);margin-top:30px}
+.why{background:var(--soft);border-left:4px solid var(--gold);padding:18px 20px;margin:0 0 28px}
+.why strong{display:block;color:var(--navy);margin-bottom:4px}
+.field{margin:0 0 24px} label,.question{display:block;font-weight:750;color:var(--navy);margin-bottom:8px}
+.help{color:var(--muted);font-size:.92rem;margin:-3px 0 10px}
+input[type=text],input[type=number],input[type=date],textarea,select{width:100%;border:1px solid #cfd5df;border-radius:9px;padding:12px 13px;font:inherit;background:white;outline:none}
+textarea{min-height:96px;resize:vertical}
+input:focus,textarea:focus,select:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(199,174,106,.18)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.options{display:grid;gap:9px}.options.two{grid-template-columns:1fr 1fr}
+.option{display:flex;align-items:flex-start;gap:9px;border:1px solid var(--line);border-radius:10px;padding:11px 12px;background:#fff}
+.option:hover{border-color:#c8ceda;background:#fafbfc}.option input{margin-top:4px}
+.callout{background:#f7f8fb;border:1px solid var(--line);padding:17px 19px;border-radius:10px;color:#3f4a61;margin:18px 0 24px}
+.callout.warn{border-left:4px solid var(--gold)}
+.nav{display:flex;justify-content:space-between;align-items:center;gap:16px;border-top:1px solid var(--line);margin-top:34px;padding-top:22px}
+button{border:0;border-radius:9px;padding:11px 18px;font:inherit;font-weight:750;cursor:pointer}
+.btn-primary{background:var(--navy);color:white}.btn-primary:hover{background:var(--blue)}
+.btn-secondary{background:#eef1f6;color:var(--navy)}.btn-link{background:transparent;color:var(--muted);padding-left:0}
+.conditional{display:none;margin-top:12px;padding:15px 17px;border-left:3px solid var(--gold);background:#faf8f2;border-radius:0 9px 9px 0}
+.conditional.show{display:block}
+.rank-card{border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:12px;background:#fff}
+.rank-head{display:grid;grid-template-columns:90px 1fr 100px;gap:12px;align-items:center}.weight{font-weight:800;color:var(--navy);text-align:right}
+.status{font-size:.9rem;color:var(--success);margin-top:10px}
+.finish{text-align:center;padding:40px 20px}.actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:22px}
+.smallprint{font-size:.82rem;color:var(--muted);margin-top:25px}
+.summary{white-space:pre-wrap;background:#f7f8fb;border:1px solid var(--line);border-radius:10px;padding:18px;text-align:left;max-height:520px;overflow:auto}
+@media(max-width:760px){.shell{margin:0;box-shadow:none}.cover{padding:46px 25px 34px;min-height:100vh}.cover-footer{flex-direction:column}.progress-wrap{padding:14px 20px 11px}.form-area{padding:32px 20px 0}h2{font-size:2rem}.grid,.grid3,.options.two,.rank-head{grid-template-columns:1fr}.weight{text-align:left}}
+@media print{body{background:#fff}.shell{box-shadow:none;margin:0;max-width:none}.cover{min-height:auto;padding:35px}.progress-wrap,.nav,.actions,#importBlock{display:none!important}.section{display:block!important;page-break-inside:auto;padding-top:12px}.form-area{padding:18px 35px}.conditional{display:block!important}}
+</style>
+</head>
+<body>
+<div class="shell">
+<section class="cover">
+<div>
+<div class="kicker">Family Strategy Session</div>
+<h1>Family Priorities & Decision Criteria</h1>
+<p class="intro">A guided working session to turn your family’s education, property, financial and lifestyle goals into clear decision criteria.</p>
+<div class="cover-card"><strong>Designed to complete together during the strategy meeting.</strong><br>Import the Family Discovery Assessment first where available, then clarify priorities, non-negotiables and trade-offs.</div>
+</div>
+<div class="cover-footer"><span>Strategy session working document</span><span>Version 1.0</span></div>
+</section>
+
+<main>
+<div class="progress-wrap">
+<div class="progress-row"><span class="progress-label" id="progressLabel">Family Decision</span><span class="progress-count" id="progressCount">Section 1 of 7 · 14% complete</span></div>
+<div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+</div>
+
+<form id="strategyForm" class="form-area">
+
+<section class="section active" data-title="Family Decision">
+<div class="section-number">Section 1 of 7</div><h2>Confirm the Family Decision</h2>
+<div class="why"><strong>Purpose</strong>Start with the Family Discovery Assessment. Confirm what has changed and clarify the decision this strategy must solve.</div>
+<div id="importBlock" class="callout warn"><strong>Have the Family Discovery JSON file?</strong><br>Import it here to pre-fill information already collected. Nothing is uploaded anywhere; the file is read only in this browser.
+<div style="margin-top:12px"><input type="file" id="importJson" accept="application/json,.json"></div><div id="importStatus" class="status"></div></div>
+<div class="grid">
+<div class="field"><label for="family_name">Family / purchasers</label><input id="family_name" name="family_name" type="text"></div>
+<div class="field"><label for="session_date">Strategy session date</label><input id="session_date" name="session_date" type="date"></div>
+</div>
+<div class="field"><label for="decision_driver">What prompted the move, and what needs to be better than today?</label><textarea id="decision_driver" name="decision_driver"></textarea></div>
+<div class="field"><label for="five_year_success">Five years from now, what would make this feel like exactly the right decision?</label><textarea id="five_year_success" name="five_year_success"></textarea></div>
+<div class="grid">
+<div class="field"><label for="timing_requirement">Timing requirement</label><input id="timing_requirement" name="timing_requirement" type="text" placeholder="e.g. living in new home before Term 1 2027"></div>
+<div class="field"><label for="timing_flexibility">Timing flexibility</label><select id="timing_flexibility" name="timing_flexibility"><option value="">Select</option><option>Not flexible</option><option>Some flexibility</option><option>Very flexible</option></select></div>
+</div>
+<div class="field"><label for="future_changes">Family changes that could affect the strategy over the next 5–10 years</label><textarea id="future_changes" name="future_changes"></textarea></div>
+<div class="nav"><span></span><button type="button" class="btn-primary next">Continue</button></div>
+</section>
+
+<section class="section" data-title="Education Priorities">
+<div class="section-number">Section 2 of 7</div><h2>Education Priorities</h2>
+<div class="why"><strong>Purpose</strong>The five ranked factors identify the strongest differentiators. They do not replace the full School Intelligence Profile, which is still reviewed for material strengths, weaknesses and risks.</div>
+<div class="callout">Rank the five education factors that should have the greatest influence on the recommendation. Controlled weights are applied internally so the family does not need to invent percentages.</div>
+<div id="rankingArea"></div>
+
+<h3>Clarify what the priorities mean</h3>
+<div id="academicClarifier" class="conditional"><div class="question">Academic priority: what matters most?</div><div class="options two">
+<label class="option"><input type="radio" name="academic_focus" value="Academic Performance"> Proven academic results</label>
+<label class="option"><input type="radio" name="academic_focus" value="Academic Opportunity"> Breadth and quality of academic opportunities</label>
+<label class="option"><input type="radio" name="academic_focus" value="Both equally"> Both equally</label>
+</div></div>
+
+<div id="artsClarifier" class="conditional"><div class="question">Arts and music: what matters most?</div><div class="options two">
+<label class="option"><input type="radio" name="arts_music_focus" value="Music"> Music</label>
+<label class="option"><input type="radio" name="arts_music_focus" value="Arts"> Visual / performing arts</label>
+<label class="option"><input type="radio" name="arts_music_focus" value="Both equally"> Both equally</label>
+</div></div>
+
+<div id="cocurricularClarifier" class="conditional"><div class="question">Co-curricular opportunities: which areas actually matter?</div><div class="options two">
+<label class="option"><input type="checkbox" name="cocurricular_focus" value="Sport"> Sport</label>
+<label class="option"><input type="checkbox" name="cocurricular_focus" value="Music"> Music</label>
+<label class="option"><input type="checkbox" name="cocurricular_focus" value="Arts"> Arts</label>
+<label class="option"><input type="checkbox" name="cocurricular_focus" value="STEM"> STEM</label>
+<label class="option"><input type="checkbox" name="cocurricular_focus" value="Leadership"> Leadership / personal development</label>
+<label class="option"><input type="checkbox" name="cocurricular_focus" value="Broad variety"> Broad variety rather than one area</label>
+</div></div>
+
+<div id="wellbeingClarifier" class="conditional"><label for="wellbeing_meaning">What does strong wellbeing support mean in practice for this child?</label><textarea id="wellbeing_meaning" name="wellbeing_meaning"></textarea></div>
+<div id="cultureClarifier" class="conditional"><label for="culture_meaning">What would a good cultural fit look and feel like?</label><textarea id="culture_meaning" name="culture_meaning"></textarea></div>
+<div id="supportClarifier" class="conditional"><label for="learning_need">Is there a specific learning, inclusion, extension or support need?</label><textarea id="learning_need" name="learning_need"></textarea></div>
+
+<h3>Additional school factors</h3>
+<div class="help">Do not force these into the top five. Record them if they materially matter.</div>
+<div class="grid3" id="extraFactors"></div>
+
+<h3>Whole-school sense check</h3>
+<div class="help">This protects against the top-five weighting hiding a material issue elsewhere in the school profile.</div>
+<div class="field"><label for="school_red_flags">Are there any school characteristics that would rule a school out even if it scored well on the top five?</label><textarea id="school_red_flags" name="school_red_flags" placeholder="e.g. weak learning support, unsuitable culture, very large school, limited pathway"></textarea></div>
+<div class="field"><label for="school_bonus_factors">Are there any standout strengths outside the top five that would materially add value?</label><textarea id="school_bonus_factors" name="school_bonus_factors"></textarea></div>
+<div class="nav"><button type="button" class="btn-secondary back">Back</button><button type="button" class="btn-primary next">Continue</button></div>
+</section>
+
+<section class="section" data-title="School Constraints">
+<div class="section-number">Section 3 of 7</div><h2>School Pathway & Enrolment</h2>
+<div class="why"><strong>Purpose</strong>Separate genuine non-negotiables from starting preferences so viable strategies are not excluded unnecessarily.</div>
+<div class="grid"><div class="field"><label for="school_pathway">Public / private preference</label><select id="school_pathway" name="school_pathway"><option value="">Select</option><option>Public</option><option>Private</option><option>Either</option><option>Unsure</option></select></div>
+<div class="field"><label for="school_pathway_flex">How fixed is that preference?</label><select id="school_pathway_flex" name="school_pathway_flex"><option value="">Select</option><option>Non-negotiable</option><option>Strong preference</option><option>Flexible</option></select></div></div>
+<div class="grid"><div class="field"><label for="gender_preference">Co-ed / single-sex preference</label><input id="gender_preference" name="gender_preference" type="text"></div>
+<div class="field"><label for="gender_flex">Flexibility</label><select id="gender_flex" name="gender_flex"><option value="">Select</option><option>Non-negotiable</option><option>Strong preference</option><option>Flexible</option></select></div></div>
+<div class="grid"><div class="field"><label for="faith_requirement">Faith / religious requirement</label><input id="faith_requirement" name="faith_requirement" type="text"></div>
+<div class="field"><label for="faith_flex">Flexibility</label><select id="faith_flex" name="faith_flex"><option value="">Select</option><option>Non-negotiable</option><option>Strong preference</option><option>Flexible</option></select></div></div>
+<div class="field"><label for="preferred_schools">Preferred schools already identified</label><textarea id="preferred_schools" name="preferred_schools"></textarea></div>
+<div class="field"><label for="excluded_schools">Schools specifically excluded</label><textarea id="excluded_schools" name="excluded_schools"></textarea></div>
+<div class="grid"><div class="field"><label for="max_school_fees">Maximum acceptable annual tuition / compulsory fees</label><input id="max_school_fees" name="max_school_fees" type="text" placeholder="$ per child / family"></div>
+<div class="field"><label for="school_fee_flex">Flexibility</label><select id="school_fee_flex" name="school_fee_flex"><option value="">Select</option><option>Non-negotiable</option><option>Strong preference</option><option>Flexible</option></select></div></div>
+<div class="grid"><div class="field"><label for="max_school_commute">Maximum acceptable school commute</label><input id="max_school_commute" name="max_school_commute" type="text" placeholder="e.g. 25 mins by car or public transport"></div>
+<div class="field"><label for="school_commute_flex">Flexibility</label><select id="school_commute_flex" name="school_commute_flex"><option value="">Select</option><option>Non-negotiable</option><option>Strong preference</option><option>Flexible</option></select></div></div>
+<div class="field"><label for="enrolment_notes">Known enrolment / catchment considerations</label><textarea id="enrolment_notes" name="enrolment_notes"></textarea></div>
+<div class="nav"><button type="button" class="btn-secondary back">Back</button><button type="button" class="btn-primary next">Continue</button></div>
+</section>
+
+<section class="section" data-title="Property">
+<div class="section-number">Section 4 of 7</div><h2>Property Requirements</h2>
+<div class="why"><strong>Purpose</strong>Capture enough detail to determine whether a school/suburb strategy can realistically deliver an acceptable home. The detailed property brief can be refined later.</div>
+<div class="grid"><div class="field"><label for="purchase_budget">Maximum purchase budget</label><input id="purchase_budget" name="purchase_budget" type="text" placeholder="$"></div>
+<div class="field"><label for="budget_flex">Budget flexibility</label><select id="budget_flex" name="budget_flex"><option value="">Select</option><option>Non-negotiable</option><option>Some flexibility</option><option>Material flexibility</option></select></div></div>
+<div class="grid"><div class="field"><label for="property_type">Acceptable property types</label><input id="property_type" name="property_type" type="text"></div>
+<div class="field"><label for="property_type_flex">Flexibility</label><select id="property_type_flex" name="property_type_flex"><option value="">Select</option><option>Non-negotiable</option><option>Strong preference</option><option>Flexible</option></select></div></div>
+<div class="grid3"><div class="field"><label for="bedrooms">Minimum bedrooms</label><input id="bedrooms" name="bedrooms" type="number" min="0"></div>
+<div class="field"><label for="bathrooms">Minimum bathrooms</label><input id="bathrooms" name="bathrooms" type="number" min="0"></div>
+<div class="field"><label for="car_spaces">Minimum car spaces</label><input id="car_spaces" name="car_spaces" type="number" min="0"></div></div>
+<div class="grid"><div class="field"><label for="land_outdoor">Land / outdoor-space requirement</label><input id="land_outdoor" name="land_outdoor" type="text"></div>
+<div class="field"><label for="land_flex">Flexibility</label><select id="land_flex" name="land_flex"><option value="">Select</option><option>Non-negotiable</option><option>Strong preference</option><option>Flexible</option></select></div></div>
+<div class="field"><label for="renovation_tolerance">Renovation tolerance</label><select id="renovation_tolerance" name="renovation_tolerance"><option value="">Select</option><option>Move-in ready only</option><option>Cosmetic improvements</option><option>Moderate renovation</option><option>Major renovation</option><option>Flexible</option></select></div>
+<div class="field"><label for="preferred_areas">Preferred areas already identified</label><textarea id="preferred_areas" name="preferred_areas"></textarea></div>
+<div class="field"><label for="excluded_areas">Areas excluded</label><textarea id="excluded_areas" name="excluded_areas"></textarea></div>
+<div class="field"><label for="other_property_criteria">Other property features that materially affect suburb feasibility</label><textarea id="other_property_criteria" name="other_property_criteria"></textarea></div>
+<div class="nav"><button type="button" class="btn-secondary back">Back</button><button type="button" class="btn-primary next">Continue</button></div>
+</section>
+
+<section class="section" data-title="Location & Lifestyle">
+<div class="section-number">Section 5 of 7</div><h2>Location & Lifestyle</h2>
+<div class="why"><strong>Purpose</strong>Turn important destinations and lifestyle needs into practical location constraints that can be tested against suburbs.</div>
+<div id="destinationRows"></div><button type="button" class="btn-secondary" id="addDestination">Add another destination / need</button>
+<div class="field" style="margin-top:24px"><label for="lifestyle_notes">Other lifestyle priorities that should influence suburb selection</label><textarea id="lifestyle_notes" name="lifestyle_notes"></textarea></div>
+<div class="nav"><button type="button" class="btn-secondary back">Back</button><button type="button" class="btn-primary next">Continue</button></div>
+</section>
+
+<section class="section" data-title="Financial Trade-offs">
+<div class="section-number">Section 6 of 7</div><h2>Financial Trade-offs</h2>
+<div class="why"><strong>Purpose</strong>Identify how the family would trade property, school fees and location against one another. Detailed financial modelling can sit behind this where required.</div>
+<div class="field"><label for="budget_firmness">How firm is the stated property budget?</label><textarea id="budget_firmness" name="budget_firmness"></textarea></div>
+<div class="field"><label for="private_school_tradeoff">Would the family spend less on the home to access a preferred private school?</label><textarea id="private_school_tradeoff" name="private_school_tradeoff"></textarea></div>
+<div class="field"><label for="public_zone_tradeoff">Would the family spend more on the home to access a preferred public-school zone?</label><textarea id="public_zone_tradeoff" name="public_zone_tradeoff"></textarea></div>
+<div class="field"><label for="fee_tipping_point">At what annual school cost does private education materially change the property strategy?</label><input id="fee_tipping_point" name="fee_tipping_point" type="text"></div>
+<div class="field"><label for="current_home_strategy">Is retaining / selling the current home part of the strategy?</label><textarea id="current_home_strategy" name="current_home_strategy"></textarea></div>
+<div class="field"><label for="finance_constraints">Timing, borrowing or cash-flow constraints that could change the options</label><textarea id="finance_constraints" name="finance_constraints"></textarea></div>
+<div class="field"><label for="hardest_tradeoff">Which compromise would be hardest for the family?</label><select id="hardest_tradeoff" name="hardest_tradeoff"><option value="">Select</option><option>Smaller / lesser home</option><option>Different suburb</option><option>Longer commute</option><option>Higher school fees</option><option>Lower school fit</option><option>Other</option></select></div>
+<div class="nav"><button type="button" class="btn-secondary back">Back</button><button type="button" class="btn-primary next">Continue</button></div>
+</section>
+
+<section class="section" data-title="Decision Criteria">
+<div class="section-number">Section 7 of 7</div><h2>Decision Boundaries & Handoff</h2>
+<div class="why"><strong>Purpose</strong>Convert the conversation into plain-English rules the Recommendation Engine can use.</div>
+<div id="boundaryArea"></div>
+<div class="field"><label for="research_gaps">Key uncertainty requiring research or modelling</label><textarea id="research_gaps" name="research_gaps"></textarea></div>
+<div class="field"><label for="advisor_notes">Adviser notes / interpretation</label><textarea id="advisor_notes" name="advisor_notes"></textarea></div>
+<div class="nav"><button type="button" class="btn-secondary back">Back</button><button type="submit" class="btn-primary">Complete strategy session</button></div>
+</section>
+
+<section class="section" data-title="Complete">
+<div class="finish">
+<div class="section-number">Strategy session complete</div><h2>Structured handoff ready</h2>
+<p>The responses are ready to be saved and used as Recommendation Engine inputs.</p>
+<div class="actions">
+<button type="button" class="btn-primary" id="printBtn">Create PDF / print summary</button>
+<button type="button" class="btn-secondary" id="downloadBtn">Download Recommendation Engine JSON</button>
+<button type="button" class="btn-secondary" id="copyBtn">Copy text summary</button>
+<button type="button" class="btn-link" id="restartBtn">Start again</button>
+</div>
+<div id="finalStatus" class="status"></div>
+<h3>Session summary</h3><div id="summaryBox" class="summary"></div>
+<p class="smallprint">This prototype stores data only in this browser unless you download or print it. No information is transmitted to a server.</p>
+</div>
+</section>
+
+</form>
+</main>
+</div>
+
+<script>
+const weights=[30,25,20,15,10];
+const defaultPriorityOptions=['Academic outcomes','Student wellbeing','School culture and values','Sport','Arts and music','Faith alignment','Learning support','Co-curricular opportunities','Transport and accessibility','Cost','STEM','Student leadership & personal development','Learning environment & facilities','Reputation / prestige','Alumni / network opportunities'];
+const extraFactors=['STEM','Student leadership & personal development','Learning environment & facilities','Reputation / prestige','Alumni / network opportunities','Faith / religious alignment'];
+const boundaryCategories=['School / education','School fees','Property','Budget','Location','Commute','Timing','Lifestyle'];
+const sections=[...document.querySelectorAll('.section')];
+let current=0,discoveryData={};
+const progressBar=document.getElementById('progressBar'),progressLabel=document.getElementById('progressLabel'),progressCount=document.getElementById('progressCount');
+
+function showSection(index){
+  sections.forEach((s,i)=>s.classList.toggle('active',i===index));
+  current=index;
+  if(index<7){
+    const pct=Math.round(((index+1)/7)*100);
+    progressBar.style.width=pct+'%';
+    progressLabel.textContent=sections[index].dataset.title;
+    progressCount.textContent=`Section ${index+1} of 7 · ${pct}% complete`;
+  }else{
+    progressBar.style.width='100%';
+    progressLabel.textContent='Complete';
+    progressCount.textContent='Finished · 100% complete';
+  }
+  window.scrollTo({top:document.querySelector('.progress-wrap').offsetTop,behavior:'smooth'});
+}
+document.querySelectorAll('.next').forEach(b=>b.addEventListener('click',()=>showSection(Math.min(current+1,7))));
+document.querySelectorAll('.back').forEach(b=>b.addEventListener('click',()=>showSection(Math.max(current-1,0))));
+
+function createRanking(selected=[]){
+  const area=document.getElementById('rankingArea'); area.innerHTML='';
+  for(let i=0;i<5;i++){
+    const div=document.createElement('div'); div.className='rank-card';
+    const opts=['<option value="">Select priority</option>',...defaultPriorityOptions.map(x=>`<option value="${x}" ${selected[i]===x?'selected':''}>${x}</option>`)].join('');
+    div.innerHTML=`<div class="rank-head"><strong>Rank ${i+1}</strong><select name="priority_${i+1}" class="priority-select">${opts}</select><div class="weight">${weights[i]}%</div></div>
+    <div class="field" style="margin:12px 0 0"><label for="priority_reason_${i+1}">Why does this matter?</label><textarea id="priority_reason_${i+1}" name="priority_reason_${i+1}" style="min-height:70px"></textarea></div>`;
+    area.appendChild(div);
+  }
+  document.querySelectorAll('.priority-select').forEach(s=>s.addEventListener('change',updateClarifiers));
+  updateClarifiers();
+}
+function updateClarifiers(){
+  const vals=[...document.querySelectorAll('.priority-select')].map(s=>s.value);
+  document.getElementById('academicClarifier').classList.toggle('show',vals.includes('Academic outcomes'));
+  document.getElementById('artsClarifier').classList.toggle('show',vals.includes('Arts and music'));
+  document.getElementById('cocurricularClarifier').classList.toggle('show',vals.includes('Co-curricular opportunities'));
+  document.getElementById('wellbeingClarifier').classList.toggle('show',vals.includes('Student wellbeing'));
+  document.getElementById('cultureClarifier').classList.toggle('show',vals.includes('School culture and values'));
+  document.getElementById('supportClarifier').classList.toggle('show',vals.includes('Learning support'));
+}
+function createExtraFactors(){
+  const area=document.getElementById('extraFactors');
+  extraFactors.forEach((f,i)=>{
+    const div=document.createElement('div'); div.className='field';
+    div.innerHTML=`<label>${f}</label>
+    <select name="extra_factor_${i}_importance"><option value="">Select</option><option>Not important</option><option>Relevant</option><option>Very important</option><option>Non-negotiable</option></select>
+    <input name="extra_factor_${i}_notes" type="text" placeholder="What specifically matters?" style="margin-top:8px">
+    <input type="hidden" name="extra_factor_${i}_name" value="${f}">`;
+    area.appendChild(div);
+  });
+}
+let destinationCounter=0;
+function addDestination(name='',ideal='',max='',flex=''){
+  const area=document.getElementById('destinationRows'),idx=destinationCounter++;
+  const div=document.createElement('div'); div.className='rank-card destination-row';
+  div.innerHTML=`<div class="grid3">
+  <div class="field"><label>Destination / lifestyle need</label><input name="destination_${idx}_name" type="text" value="${name}"></div>
+  <div class="field"><label>Ideal</label><input name="destination_${idx}_ideal" type="text" value="${ideal}"></div>
+  <div class="field"><label>Maximum acceptable / minimum requirement</label><input name="destination_${idx}_max" type="text" value="${max}"></div>
+  </div><div class="grid">
+  <div class="field"><label>Flexibility</label><select name="destination_${idx}_flex"><option value="">Select</option><option ${flex==='Non-negotiable'?'selected':''}>Non-negotiable</option><option ${flex==='Strong preference'?'selected':''}>Strong preference</option><option ${flex==='Flexible'?'selected':''}>Flexible</option></select></div>
+  <div class="field" style="display:flex;align-items:end"><button type="button" class="btn-link remove-destination">Remove</button></div></div>`;
+  area.appendChild(div);
+  div.querySelector('.remove-destination').addEventListener('click',()=>div.remove());
+}
+function createBoundaries(){
+  const area=document.getElementById('boundaryArea');
+  boundaryCategories.forEach((c,i)=>{
+    const div=document.createElement('div');div.className='rank-card';
+    div.innerHTML=`<strong>${c}</strong><div class="grid3" style="margin-top:10px">
+    <div class="field"><label>Non-negotiable</label><textarea name="boundary_${i}_nonneg" style="min-height:65px"></textarea></div>
+    <div class="field"><label>Strongly preferred</label><textarea name="boundary_${i}_strong" style="min-height:65px"></textarea></div>
+    <div class="field"><label>Flexible</label><textarea name="boundary_${i}_flex" style="min-height:65px"></textarea></div></div>
+    <input type="hidden" name="boundary_${i}_category" value="${c}">`;
+    area.appendChild(div);
+  });
+}
+function normalise(val){if(Array.isArray(val))return val;if(val==null||val==='')return[];return [val]}
+function setVal(id,val){const el=document.getElementById(id);if(el&&val!=null)el.value=Array.isArray(val)?val.join(', '):val}
+
+document.getElementById('importJson').addEventListener('change',async e=>{
+  const f=e.target.files[0]; if(!f)return;
+  try{
+    discoveryData=JSON.parse(await f.text());
+    setVal('family_name',discoveryData.purchasers);
+    setVal('decision_driver',discoveryData.prompt);
+    setVal('five_year_success',discoveryData.success);
+    setVal('timing_requirement',discoveryData.move_deadline);
+    setVal('timing_flexibility',discoveryData.deadline_flexibility);
+    setVal('future_changes',discoveryData.changes);
+    setVal('school_pathway',discoveryData.pathway);
+    setVal('preferred_schools',discoveryData.schools);
+    setVal('purchase_budget',discoveryData.budget);
+    setVal('property_type',discoveryData.property_type);
+    setVal('bedrooms',discoveryData.bedrooms);
+    setVal('bathrooms',discoveryData.bathrooms);
+    setVal('car_spaces',discoveryData.car_spaces);
+    setVal('land_outdoor',discoveryData.land_size);
+    setVal('renovation_tolerance',discoveryData.renovation);
+    setVal('preferred_areas',discoveryData.preferred_suburbs);
+    setVal('excluded_areas',discoveryData.excluded_suburbs);
+    setVal('lifestyle_notes',normalise(discoveryData.lifestyle).join(', '));
+    setVal('current_home_strategy',discoveryData.current_home_plan);
+    createRanking(normalise(discoveryData.education_factors).slice(0,5));
+    if(discoveryData.locations)addDestination('Important locations','',discoveryData.locations,'');
+    document.getElementById('importStatus').textContent='Discovery Assessment imported successfully. Please review and refine the pre-filled information.';
+  }catch(err){
+    document.getElementById('importStatus').textContent='Could not read that JSON file. Please check it is the backup downloaded from the Family Discovery Assessment.';
+  }
+});
+
+function collectForm(){
+  const fd=new FormData(document.getElementById('strategyForm')),raw={};
+  for(const [k,v] of fd.entries()){if(raw[k]!==undefined)raw[k]=Array.isArray(raw[k])?[...raw[k],v]:[raw[k],v];else raw[k]=v}
+  const priorities=[]; for(let i=1;i<=5;i++)priorities.push({rank:i,criterion:raw[`priority_${i}`]||'',weight:weights[i-1],reason:raw[`priority_reason_${i}`]||''});
+  const extras=[]; for(let i=0;i<extraFactors.length;i++)extras.push({criterion:raw[`extra_factor_${i}_name`]||extraFactors[i],importance:raw[`extra_factor_${i}_importance`]||'',notes:raw[`extra_factor_${i}_notes`]||''});
+  const destinations=[...document.querySelectorAll('.destination-row')].map(row=>({
+    name:row.querySelector('input[name$="_name"]')?.value||'',
+    ideal:row.querySelector('input[name$="_ideal"]')?.value||'',
+    threshold:row.querySelector('input[name$="_max"]')?.value||'',
+    flexibility:row.querySelector('select[name$="_flex"]')?.value||''
+  }));
+  const boundaries=[];for(let i=0;i<boundaryCategories.length;i++)boundaries.push({category:raw[`boundary_${i}_category`]||boundaryCategories[i],non_negotiable:raw[`boundary_${i}_nonneg`]||'',strong_preference:raw[`boundary_${i}_strong`]||'',flexible:raw[`boundary_${i}_flex`]||''});
+  return{
+    version:'1.0',created_at:new Date().toISOString(),
+    family:{name:raw.family_name||'',session_date:raw.session_date||'',decision_driver:raw.decision_driver||'',five_year_success:raw.five_year_success||'',timing_requirement:raw.timing_requirement||'',timing_flexibility:raw.timing_flexibility||'',future_changes:raw.future_changes||''},
+    education:{priorities,academic_focus:raw.academic_focus||'',arts_music_focus:raw.arts_music_focus||'',cocurricular_focus:normalise(raw.cocurricular_focus),wellbeing_meaning:raw.wellbeing_meaning||'',culture_meaning:raw.culture_meaning||'',learning_need:raw.learning_need||'',additional_factors:extras,red_flags:raw.school_red_flags||'',bonus_factors:raw.school_bonus_factors||''},
+    school_constraints:{pathway:raw.school_pathway||'',pathway_flexibility:raw.school_pathway_flex||'',gender_preference:raw.gender_preference||'',gender_flexibility:raw.gender_flex||'',faith_requirement:raw.faith_requirement||'',faith_flexibility:raw.faith_flex||'',preferred_schools:raw.preferred_schools||'',excluded_schools:raw.excluded_schools||'',max_fees:raw.max_school_fees||'',fee_flexibility:raw.school_fee_flex||'',max_commute:raw.max_school_commute||'',commute_flexibility:raw.school_commute_flex||'',enrolment_notes:raw.enrolment_notes||''},
+    property:{budget:raw.purchase_budget||'',budget_flexibility:raw.budget_flex||'',property_type:raw.property_type||'',property_type_flexibility:raw.property_type_flex||'',bedrooms:raw.bedrooms||'',bathrooms:raw.bathrooms||'',car_spaces:raw.car_spaces||'',land_outdoor:raw.land_outdoor||'',land_flexibility:raw.land_flex||'',renovation_tolerance:raw.renovation_tolerance||'',preferred_areas:raw.preferred_areas||'',excluded_areas:raw.excluded_areas||'',other_criteria:raw.other_property_criteria||''},
+    location_lifestyle:{destinations,lifestyle_notes:raw.lifestyle_notes||''},
+    financial_tradeoffs:{budget_firmness:raw.budget_firmness||'',private_school_tradeoff:raw.private_school_tradeoff||'',public_zone_tradeoff:raw.public_zone_tradeoff||'',fee_tipping_point:raw.fee_tipping_point||'',current_home_strategy:raw.current_home_strategy||'',finance_constraints:raw.finance_constraints||'',hardest_tradeoff:raw.hardest_tradeoff||''},
+    decision_boundaries:boundaries,research_gaps:raw.research_gaps||'',advisor_notes:raw.advisor_notes||'',source_discovery_imported:Object.keys(discoveryData).length>0
+  };
+}
+function makeSummary(d){
+  const p=d.education.priorities.filter(x=>x.criterion).map(x=>`${x.rank}. ${x.criterion} (${x.weight}%)${x.reason?' — '+x.reason:''}`).join('\n');
+  const nonneg=d.decision_boundaries.filter(x=>x.non_negotiable).map(x=>`${x.category}: ${x.non_negotiable}`).join('\n');
+  return `FAMILY PRIORITIES & DECISION CRITERIA
+
+Family: ${d.family.name}
+Session date: ${d.family.session_date}
+
+Decision to solve
+${d.family.decision_driver}
+
+Five-year success
+${d.family.five_year_success}
+
+Ranked education priorities
+${p||'Not completed'}
+
+School pathway
+${d.school_constraints.pathway} (${d.school_constraints.pathway_flexibility})
+Maximum school fees: ${d.school_constraints.max_fees}
+Maximum school commute: ${d.school_constraints.max_commute}
+
+Property
+Budget: ${d.property.budget} (${d.property.budget_flexibility})
+Property type: ${d.property.property_type}
+Minimum: ${d.property.bedrooms} bed / ${d.property.bathrooms} bath / ${d.property.car_spaces} car
+Preferred areas: ${d.property.preferred_areas}
+Excluded areas: ${d.property.excluded_areas}
+
+Key non-negotiables
+${nonneg||'Not completed'}
+
+Hardest trade-off
+${d.financial_tradeoffs.hardest_tradeoff}
+
+Research / modelling gaps
+${d.research_gaps}
+
+Adviser notes
+${d.advisor_notes}`;
+}
+document.getElementById('strategyForm').addEventListener('submit',e=>{
+  e.preventDefault();const d=collectForm();document.getElementById('summaryBox').textContent=makeSummary(d);
+  localStorage.setItem('familyStrategySession',JSON.stringify(d));showSection(7);
+});
+document.getElementById('downloadBtn').addEventListener('click',()=>{
+  const d=collectForm(),blob=new Blob([JSON.stringify(d,null,2)],{type:'application/json'}),a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);const n=(d.family.name||'family').replace(/[^a-z0-9]+/gi,'-').replace(/^-|-$/g,'').toLowerCase();
+  a.download=`${n||'family'}-recommendation-engine-inputs.json`;a.click();URL.revokeObjectURL(a.href);
+  document.getElementById('finalStatus').textContent='Recommendation Engine JSON downloaded.';
+});
+document.getElementById('printBtn').addEventListener('click',()=>window.print());
+document.getElementById('copyBtn').addEventListener('click',async()=>{await navigator.clipboard.writeText(document.getElementById('summaryBox').textContent);document.getElementById('finalStatus').textContent='Summary copied to clipboard.'});
+document.getElementById('restartBtn').addEventListener('click',()=>{if(confirm('Clear this strategy session and start again?')){localStorage.removeItem('familyStrategySession');location.reload()}});
+document.getElementById('addDestination').addEventListener('click',()=>addDestination());
+
+createRanking();createExtraFactors();createBoundaries();
+addDestination('Workplace 1');addDestination('Workplace 2');addDestination('Grandparents / support network');addDestination('Sport / activities');
+</script>
+</body>
+</html>
