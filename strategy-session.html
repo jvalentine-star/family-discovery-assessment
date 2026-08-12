@@ -72,7 +72,7 @@ button{border:0;border-radius:9px;padding:11px 18px;font:inherit;font-weight:750
 <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
 </div>
 
-<form id="strategyForm" class="form-area"><input type="hidden" id="family_id" name="family_id">
+<form id="strategyForm" class="form-area" autocomplete="off"><input type="hidden" id="family_id" name="family_id">
 
 <section class="section active" data-title="Family Decision">
 <div class="section-number">Section 1 of 7</div><h2>Confirm the Family Decision</h2>
@@ -147,8 +147,9 @@ button{border:0;border-radius:9px;padding:11px 18px;font:inherit;font-weight:750
 <div class="field"><label for="faith_flex">Flexibility</label><select id="faith_flex" name="faith_flex"><option value="">Select</option><option>Non-negotiable</option><option>Strong preference</option><option>Flexible</option></select></div></div>
 <div class="field"><label for="preferred_schools">Preferred schools already identified</label><textarea id="preferred_schools" name="preferred_schools"></textarea></div>
 <div class="field"><label for="excluded_schools">Schools specifically excluded</label><textarea id="excluded_schools" name="excluded_schools"></textarea></div>
-<div class="grid"><div class="field"><label for="max_school_fees">Maximum acceptable annual tuition / compulsory fees</label><input id="max_school_fees" name="max_school_fees" type="text" placeholder="$ per child / family"></div>
+<div class="grid"><div class="field"><label for="max_school_fees">Maximum acceptable annual tuition / compulsory fees per child</label><input id="max_school_fees" name="max_school_fees" type="text" placeholder="$ per child"></div>
 <div class="field"><label for="school_fee_flex">Flexibility</label><select id="school_fee_flex" name="school_fee_flex"><option value="">Select</option><option>Non-negotiable</option><option>Strong preference</option><option>Flexible</option></select></div></div>
+<div class="field"><label for="max_family_school_spend">If more than one child will attend a fee-paying school, what total annual family school spend would materially change the property strategy?</label><input id="max_family_school_spend" name="max_family_school_spend" type="text" placeholder="$ total per year across all children"><div class="help">Record the family's own boundary only. Affordability advice sits with the financial planner.</div></div>
 <div class="grid"><div class="field"><label for="max_school_commute">Maximum acceptable school commute</label><input id="max_school_commute" name="max_school_commute" type="text" placeholder="e.g. 25 mins by car or public transport"></div>
 <div class="field"><label for="school_commute_flex">Flexibility</label><select id="school_commute_flex" name="school_commute_flex"><option value="">Select</option><option>Non-negotiable</option><option>Strong preference</option><option>Flexible</option></select></div></div>
 <div class="field"><label for="enrolment_notes">Known enrolment / catchment considerations</label><textarea id="enrolment_notes" name="enrolment_notes"></textarea></div>
@@ -361,7 +362,7 @@ function collectForm(){
     version:'1.0',created_at:new Date().toISOString(),family_id:raw.family_id||'',
     family:{name:raw.family_name||'',session_date:raw.session_date||'',decision_driver:raw.decision_driver||'',five_year_success:raw.five_year_success||'',timing_requirement:raw.timing_requirement||'',timing_flexibility:raw.timing_flexibility||'',future_changes:raw.future_changes||''},
     education:{priorities,academic_focus:raw.academic_focus||'',arts_music_focus:raw.arts_music_focus||'',cocurricular_focus:normalise(raw.cocurricular_focus),wellbeing_meaning:raw.wellbeing_meaning||'',culture_meaning:raw.culture_meaning||'',learning_need:raw.learning_need||'',additional_factors:extras,red_flags:raw.school_red_flags||'',bonus_factors:raw.school_bonus_factors||''},
-    school_constraints:{pathway:raw.school_pathway||'',pathway_flexibility:raw.school_pathway_flex||'',gender_preference:raw.gender_preference||'',gender_flexibility:raw.gender_flex||'',faith_requirement:raw.faith_requirement||'',faith_flexibility:raw.faith_flex||'',preferred_schools:raw.preferred_schools||'',excluded_schools:raw.excluded_schools||'',max_fees:raw.max_school_fees||'',fee_flexibility:raw.school_fee_flex||'',max_commute:raw.max_school_commute||'',commute_flexibility:raw.school_commute_flex||'',enrolment_notes:raw.enrolment_notes||''},
+    school_constraints:{pathway:raw.school_pathway||'',pathway_flexibility:raw.school_pathway_flex||'',gender_preference:raw.gender_preference||'',gender_flexibility:raw.gender_flex||'',faith_requirement:raw.faith_requirement||'',faith_flexibility:raw.faith_flex||'',preferred_schools:raw.preferred_schools||'',excluded_schools:raw.excluded_schools||'',max_fees:raw.max_school_fees||'',max_family_school_spend:raw.max_family_school_spend||'',fee_flexibility:raw.school_fee_flex||'',max_commute:raw.max_school_commute||'',commute_flexibility:raw.school_commute_flex||'',enrolment_notes:raw.enrolment_notes||''},
     property:{budget:raw.purchase_budget||'',budget_flexibility:raw.budget_flex||'',property_type:raw.property_type||'',property_type_flexibility:raw.property_type_flex||'',bedrooms:raw.bedrooms||'',bathrooms:raw.bathrooms||'',car_spaces:raw.car_spaces||'',land_outdoor:raw.land_outdoor||'',land_flexibility:raw.land_flex||'',renovation_tolerance:raw.renovation_tolerance||'',preferred_areas:raw.preferred_areas||'',excluded_areas:raw.excluded_areas||'',other_criteria:raw.other_property_criteria||''},
     location_lifestyle:{destinations,lifestyle_notes:raw.lifestyle_notes||''},
     financial_tradeoffs:{budget_firmness:raw.budget_firmness||'',private_school_tradeoff:raw.private_school_tradeoff||'',public_zone_tradeoff:raw.public_zone_tradeoff||'',fee_tipping_point:raw.fee_tipping_point||'',current_home_strategy:raw.current_home_strategy||'',finance_constraints:raw.finance_constraints||'',hardest_tradeoff:raw.hardest_tradeoff||''},
@@ -422,7 +423,6 @@ document.getElementById('strategyForm').addEventListener('submit',async e=>{
   e.preventDefault();
   const d=collectForm();
   document.getElementById('summaryBox').textContent=makeSummary(d);
-  localStorage.setItem('familyStrategySession',JSON.stringify(d));
   showSection(7);
   const status=document.getElementById('finalStatus');
   status.textContent='Saving strategy session…';
@@ -444,8 +444,15 @@ document.getElementById('downloadBtn').addEventListener('click',()=>{
 });
 document.getElementById('printBtn').addEventListener('click',()=>window.print());
 document.getElementById('copyBtn').addEventListener('click',async()=>{await navigator.clipboard.writeText(document.getElementById('summaryBox').textContent);document.getElementById('finalStatus').textContent='Summary copied to clipboard.'});
-document.getElementById('restartBtn').addEventListener('click',()=>{if(confirm('Clear this strategy session and start again?')){localStorage.removeItem('familyStrategySession');location.reload()}});
+document.getElementById('restartBtn').addEventListener('click',()=>{if(confirm('Clear this strategy session and start again?')){localStorage.removeItem('familyStrategySession');document.getElementById('strategyForm').reset();location.replace(location.pathname)}});
 document.getElementById('addDestination').addEventListener('click',()=>addDestination());
+
+// Always open the master Strategy Session as a clean form. Completed responses are stored in Google Sheets, not in this browser.
+localStorage.removeItem('familyStrategySession');
+window.addEventListener('pageshow',()=>{
+  const form=document.getElementById('strategyForm');
+  if(form) form.reset();
+});
 
 createRanking();createExtraFactors();createBoundaries();
 addDestination('Workplace 1');addDestination('Workplace 2');addDestination('Grandparents / support network');addDestination('Sport / activities');
