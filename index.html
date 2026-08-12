@@ -6,186 +6,59 @@
 <title>Family Discovery Assessment</title>
 <style>
 :root{
-  --navy:#03123d;
-  --blue:#05206e;
-  --gold:#c7ae6a;
-  --gold-light:#d5c28f;
-  --ink:#172033;
-  --muted:#65708a;
-  --paper:#ffffff;
-  --soft:#f5f3ed;
-  --line:#e4e7ee;
-  --success:#315b46;
+  --navy:#03123d;--blue:#05206e;--gold:#c7ae6a;--gold-light:#d5c28f;
+  --ink:#172033;--muted:#65708a;--paper:#fff;--soft:#f5f3ed;
+  --line:#e4e7ee;--success:#315b46
 }
 *{box-sizing:border-box}
-body{
-  margin:0;
-  font-family: Inter, Arial, Helvetica, sans-serif;
-  color:var(--ink);
-  background:#eef0f5;
-  line-height:1.55;
-}
-.shell{
-  max-width:980px;
-  margin:32px auto;
-  background:var(--paper);
-  min-height:90vh;
-  box-shadow:0 18px 55px rgba(3,18,61,.12);
-}
-.cover{
-  min-height:640px;
-  padding:72px 72px 54px;
-  background:
-    radial-gradient(circle at 82% 18%, rgba(199,174,106,.20), transparent 24%),
-    linear-gradient(150deg,var(--navy),#071b54 72%,#0b286d);
-  color:white;
-  position:relative;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-}
-.kicker{
-  text-transform:uppercase;
-  letter-spacing:.18em;
-  font-size:.78rem;
-  font-weight:700;
-  color:var(--gold-light);
-}
-.cover h1{
-  max-width:700px;
-  font-family: Georgia, 'Times New Roman', serif;
-  font-size:clamp(2.8rem,7vw,5.6rem);
-  line-height:.97;
-  margin:22px 0 24px;
-  font-weight:500;
-}
-.cover .intro{
-  max-width:650px;
-  font-size:1.12rem;
-  color:#e8ebf5;
-}
-.cover-card{
-  margin-top:46px;
-  max-width:650px;
-  border-left:3px solid var(--gold);
-  padding:4px 0 4px 22px;
-  color:#f6f2e7;
-}
-.cover-footer{
-  display:flex;
-  justify-content:space-between;
-  gap:20px;
-  color:#cdd5e9;
-  font-size:.9rem;
-}
+body{margin:0;font-family:Inter,Arial,Helvetica,sans-serif;color:var(--ink);background:#eef0f5;line-height:1.55}
+.shell{max-width:980px;margin:32px auto;background:var(--paper);min-height:90vh;box-shadow:0 18px 55px rgba(3,18,61,.12)}
+.cover{min-height:640px;padding:72px 72px 54px;background:radial-gradient(circle at 82% 18%,rgba(199,174,106,.20),transparent 24%),linear-gradient(150deg,var(--navy),#071b54 72%,#0b286d);color:#fff;display:flex;flex-direction:column;justify-content:space-between}
+.kicker{text-transform:uppercase;letter-spacing:.18em;font-size:.78rem;font-weight:700;color:var(--gold-light)}
+.cover h1{max-width:700px;font-family:Georgia,'Times New Roman',serif;font-size:clamp(2.8rem,7vw,5.6rem);line-height:.97;margin:22px 0 24px;font-weight:500}
+.cover .intro{max-width:650px;font-size:1.12rem;color:#e8ebf5}
+.cover-card{margin-top:46px;max-width:650px;border-left:3px solid var(--gold);padding:4px 0 4px 22px;color:#f6f2e7}
+.cover-footer{display:flex;justify-content:space-between;gap:20px;color:#cdd5e9;font-size:.9rem}
 main{padding:0 0 60px}
-.progress-wrap{
-  position:sticky;
-  top:0;
-  z-index:10;
-  background:rgba(255,255,255,.96);
-  backdrop-filter: blur(10px);
-  border-bottom:1px solid var(--line);
-  padding:18px 56px 14px;
-}
-.progress-row{
-  display:flex;
-  justify-content:space-between;
-  gap:16px;
-  align-items:center;
-  margin-bottom:9px;
-}
-.progress-label{font-weight:700;color:var(--navy)}
-.progress-count{font-size:.9rem;color:var(--muted)}
-.progress-track{
-  height:7px;border-radius:99px;background:#e8ebf1;overflow:hidden
-}
-.progress-bar{
-  height:100%;width:12.5%;background:linear-gradient(90deg,var(--gold),#b89945);
-  transition:width .25s ease
-}
-.form-area{padding:48px 56px 10px}
-.section{display:none}
-.section.active{display:block}
-.section-number{
-  color:var(--gold);font-weight:800;letter-spacing:.15em;text-transform:uppercase;font-size:.8rem
-}
-h2{
-  font-family:Georgia,'Times New Roman',serif;
-  font-size:2.5rem;
-  color:var(--navy);
-  margin:8px 0 18px;
-  font-weight:500;
-}
-.why{
-  background:var(--soft);
-  border-left:4px solid var(--gold);
-  padding:20px 22px;
-  margin:0 0 34px;
-}
+.progress-wrap{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:18px 56px 14px}
+.progress-row{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:9px}
+.progress-label{font-weight:700;color:var(--navy)} .progress-count{font-size:.9rem;color:var(--muted)}
+.progress-track{height:7px;border-radius:99px;background:#e8ebf1;overflow:hidden}
+.progress-bar{height:100%;width:12.5%;background:linear-gradient(90deg,var(--gold),#b89945);transition:width .25s ease}
+.form-area{padding:48px 56px 10px}.section{display:none}.section.active{display:block}
+.section-number{color:var(--gold);font-weight:800;letter-spacing:.15em;text-transform:uppercase;font-size:.8rem}
+h2{font-family:Georgia,'Times New Roman',serif;font-size:2.5rem;color:var(--navy);margin:8px 0 18px;font-weight:500}
+.why{background:var(--soft);border-left:4px solid var(--gold);padding:20px 22px;margin:0 0 34px}
 .why strong{display:block;color:var(--navy);margin-bottom:4px}
-.field{margin:0 0 28px}
-label,.question{
-  display:block;font-weight:750;color:var(--navy);margin-bottom:9px
-}
+.field{margin:0 0 28px} label,.question{display:block;font-weight:750;color:var(--navy);margin-bottom:9px}
 .help{color:var(--muted);font-size:.93rem;margin:-3px 0 10px}
-input[type=text],input[type=number],input[type=date],input[type=email],textarea,select{
-  width:100%;border:1px solid #cfd5df;border-radius:9px;padding:13px 14px;
-  font:inherit;background:white;outline:none
-}
+input[type=text],input[type=number],input[type=date],input[type=email],textarea,select{width:100%;border:1px solid #cfd5df;border-radius:9px;padding:13px 14px;font:inherit;background:#fff;outline:none}
 textarea{min-height:112px;resize:vertical}
 input:focus,textarea:focus,select:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(199,174,106,.18)}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.options{display:grid;gap:10px}
-.options.two{grid-template-columns:1fr 1fr}
-.option{
-  display:flex;align-items:flex-start;gap:10px;border:1px solid var(--line);
-  border-radius:10px;padding:12px 13px;background:#fff
-}
-.option:hover{border-color:#c8ceda;background:#fafbfc}
-.option input{margin-top:4px}
-.callout{
-  background:#f7f8fb;border:1px solid var(--line);padding:18px 20px;border-radius:10px;
-  color:#3f4a61;margin:22px 0 28px
-}
-.nav{
-  display:flex;justify-content:space-between;align-items:center;gap:16px;
-  border-top:1px solid var(--line);margin-top:38px;padding-top:24px
-}
-button{
-  border:0;border-radius:9px;padding:12px 20px;font:inherit;font-weight:750;cursor:pointer
-}
-.btn-primary{background:var(--navy);color:white}
-.btn-primary:hover{background:var(--blue)}
-.btn-secondary{background:#eef1f6;color:var(--navy)}
-.btn-link{background:transparent;color:var(--muted);padding-left:0}
-.finish{
-  text-align:center;padding:46px 20px
-}
-.finish h2{margin-bottom:12px}
+.options{display:grid;gap:10px}.options.two{grid-template-columns:1fr 1fr}
+.option{display:flex;align-items:flex-start;gap:10px;border:1px solid var(--line);border-radius:10px;padding:12px 13px;background:#fff}
+.option:hover{border-color:#c8ceda;background:#fafbfc}.option input{margin-top:4px}
+.callout{background:#f7f8fb;border:1px solid var(--line);padding:18px 20px;border-radius:10px;color:#3f4a61;margin:22px 0 28px}
+.nav{display:flex;justify-content:space-between;align-items:center;gap:16px;border-top:1px solid var(--line);margin-top:38px;padding-top:24px}
+button{border:0;border-radius:9px;padding:12px 20px;font:inherit;font-weight:750;cursor:pointer}
+.btn-primary{background:var(--navy);color:#fff}.btn-primary:hover{background:var(--blue)}
+.btn-secondary{background:#eef1f6;color:var(--navy)}.btn-link{background:transparent;color:var(--muted);padding-left:0}
+.finish{text-align:center;padding:46px 20px}.finish h2{margin-bottom:12px}
 .actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:24px}
-.status{font-size:.88rem;color:var(--success);margin-top:8px}
 .smallprint{font-size:.82rem;color:var(--muted);margin-top:28px}
 .conditional{display:none;margin-top:14px;padding:16px 18px;border-left:3px solid var(--gold);background:#faf8f2;border-radius:0 9px 9px 0}
 .conditional.show{display:block}
 .submit-status{margin-top:14px;font-size:.92rem;color:var(--muted)}
 .submit-status.success{color:var(--success);font-weight:700}
 .submit-status.error{color:#8b2f2f;font-weight:700}
-.summary-note{background:#f7f8fb;border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-top:18px;color:#3f4a61}
 @media(max-width:700px){
-  .shell{margin:0;box-shadow:none}
-  .cover{padding:48px 26px 36px;min-height:100vh}
-  .cover-footer{flex-direction:column}
-  .progress-wrap{padding:15px 22px 12px}
-  .form-area{padding:34px 22px 0}
-  h2{font-size:2rem}
-  .grid,.options.two{grid-template-columns:1fr}
+  .shell{margin:0;box-shadow:none}.cover{padding:48px 26px 36px;min-height:100vh}.cover-footer{flex-direction:column}
+  .progress-wrap{padding:15px 22px 12px}.form-area{padding:34px 22px 0}h2{font-size:2rem}.grid,.options.two{grid-template-columns:1fr}
 }
 @media print{
-  body{background:white}.shell{box-shadow:none;margin:0;max-width:none}
-  .cover{min-height:auto;padding:40px}.progress-wrap,.nav,.actions,.status{display:none!important}
-  .section{display:block!important;page-break-inside:avoid;padding-top:18px}
-  .form-area{padding:20px 40px}
+  body{background:#fff}.shell{box-shadow:none;margin:0;max-width:none}.cover{min-height:auto;padding:40px}
+  .progress-wrap,.nav,.actions,.submit-status{display:none!important}.section{display:block!important;page-break-inside:avoid;padding-top:18px}.form-area{padding:20px 40px}
 }
 </style>
 </head>
@@ -196,32 +69,22 @@ button{
     <div class="kicker">Family Strategy Assessment</div>
     <h1>Family Discovery Assessment</h1>
     <p class="intro">A thoughtful first step towards aligning your family’s education, lifestyle, financial and property decisions.</p>
-    <div class="cover-card">
-      <strong>Estimated completion time: 10 minutes</strong><br>
-      Your answers will help shape a more focused and useful strategy session.
-    </div>
+    <div class="cover-card"><strong>Estimated completion time: 10 minutes</strong><br>Your answers will help shape a more focused and useful strategy session.</div>
   </div>
-  <div class="cover-footer">
-    <span>Prepared for your family</span>
-    <span>Confidential discovery questionnaire</span>
-  </div>
+  <div class="cover-footer"><span>Prepared for your family</span><span>Confidential discovery questionnaire</span></div>
 </section>
 
 <main>
 <div class="progress-wrap">
-  <div class="progress-row">
-    <span class="progress-label" id="progressLabel">Your Family</span>
-    <span class="progress-count" id="progressCount">Section 1 of 8 · 13% complete</span>
-  </div>
+  <div class="progress-row"><span class="progress-label" id="progressLabel">Your Family</span><span class="progress-count" id="progressCount">Section 1 of 8 · 13% complete</span></div>
   <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
 </div>
 
-<form id="assessmentForm" class="form-area">
-<section class="section active" data-title="Your Family">
-  <div class="section-number">Section 1 of 8</div>
-  <h2>Your Family</h2>
-  <div class="why"><strong>Why we’re asking</strong>Before discussing schools or suburbs, we want to understand the people this decision needs to support, both now and in the years ahead.</div>
+<form id="assessmentForm" class="form-area" autocomplete="off">
 
+<section class="section active" data-title="Your Family">
+  <div class="section-number">Section 1 of 8</div><h2>Your Family</h2>
+  <div class="why"><strong>Why we’re asking</strong>Before discussing schools or suburbs, we want to understand the people this decision needs to support, both now and in the years ahead.</div>
   <div class="field"><label for="purchasers">Who will be purchasing the property?</label><input id="purchasers" name="purchasers" type="text" placeholder="Full names"></div>
 
   <div class="field">
@@ -244,10 +107,7 @@ button{
       <label class="option"><input type="radio" name="other_household" value="Yes" data-toggle="otherHouseholdDetails"> Yes</label>
       <label class="option"><input type="radio" name="other_household" value="No" data-toggle="otherHouseholdDetails"> No</label>
     </div>
-    <div class="conditional" id="otherHouseholdDetails">
-      <label for="other_household_details">Who else will be living in the home?</label>
-      <textarea id="other_household_details" name="other_household_details"></textarea>
-    </div>
+    <div class="conditional" id="otherHouseholdDetails"><label for="other_household_details">Who else will be living in the home?</label><textarea id="other_household_details" name="other_household_details"></textarea></div>
   </div>
 
   <div class="field">
@@ -258,14 +118,10 @@ button{
       <label class="option"><input type="radio" name="family_changes_expected" value="No" data-toggle="familyChangesDetails"> No</label>
       <label class="option"><input type="radio" name="family_changes_expected" value="Unsure" data-toggle="familyChangesDetails"> Unsure</label>
     </div>
-    <div class="conditional" id="familyChangesDetails">
-      <label for="changes">Please tell us more.</label>
-      <textarea id="changes" name="changes"></textarea>
-    </div>
+    <div class="conditional" id="familyChangesDetails"><label for="changes">Please tell us more.</label><textarea id="changes" name="changes"></textarea></div>
   </div>
 
   <div class="field"><label for="prompt">What prompted you to begin thinking about moving?</label><textarea id="prompt" name="prompt"></textarea></div>
-
   <div class="nav"><span></span><button type="button" class="btn-primary next">Continue</button></div>
 </section>
 
@@ -282,12 +138,7 @@ button{
       <div class="grid">
         <div class="field"><label for="move_deadline">What is the date?</label><input id="move_deadline" name="move_deadline" type="date"></div>
         <div class="field"><label for="deadline_flexibility">How flexible is the timing?</label>
-          <select id="deadline_flexibility" name="deadline_flexibility">
-            <option value="">Select one</option>
-            <option>Not flexible</option>
-            <option>Some flexibility</option>
-            <option>Very flexible</option>
-          </select>
+          <select id="deadline_flexibility" name="deadline_flexibility"><option value="">Select one</option><option>Not flexible</option><option>Some flexibility</option><option>Very flexible</option></select>
         </div>
       </div>
     </div>
@@ -343,16 +194,13 @@ button{
     <label class="option"><input type="checkbox" name="education_factors" value="Cost"> Cost</label>
   </div></div>
   <div class="field">
-      <div class="question">Are there schools already on your shortlist?</div>
-      <div class="options two">
-        <label class="option"><input type="radio" name="has_school_shortlist" value="Yes" data-toggle="schoolShortlistDetails"> Yes</label>
-        <label class="option"><input type="radio" name="has_school_shortlist" value="No" data-toggle="schoolShortlistDetails"> No</label>
-      </div>
-      <div class="conditional" id="schoolShortlistDetails">
-        <label for="schools">Which schools are you considering?</label>
-        <textarea id="schools" name="schools"></textarea>
-      </div>
+    <div class="question">Are there schools already on your shortlist?</div>
+    <div class="options two">
+      <label class="option"><input type="radio" name="has_school_shortlist" value="Yes" data-toggle="schoolShortlistDetails"> Yes</label>
+      <label class="option"><input type="radio" name="has_school_shortlist" value="No" data-toggle="schoolShortlistDetails"> No</label>
     </div>
+    <div class="conditional" id="schoolShortlistDetails"><label for="schools">Which schools are you considering?</label><textarea id="schools" name="schools"></textarea></div>
+  </div>
   <div class="nav"><button type="button" class="btn-secondary back">Back</button><button type="button" class="btn-primary next">Continue</button></div>
 </section>
 
@@ -360,16 +208,10 @@ button{
   <div class="section-number">Section 5 of 8</div><h2>Financial Position</h2>
   <div class="why"><strong>Why we’re asking</strong>A sound strategy should work in practice, not just on paper. This section helps establish the broad financial boundaries before more detailed modelling.</div>
   <div class="grid">
-    <div class="field"><label for="living">Current living situation</label><select id="living" name="living" data-select-toggle="ownedHomeDetails"><option value="">Select one</option><option>Own current home</option><option>Rent</option><option>Live with family</option><option>Other</option></select>
-      <div class="conditional" id="ownedHomeDetails">
-        <label for="current_home_plan">What are your plans for your current home?</label>
-        <select id="current_home_plan" name="current_home_plan">
-          <option value="">Select one</option>
-          <option>Sell before purchasing</option>
-          <option>Sell after purchasing</option>
-          <option>Keep as an investment</option>
-          <option>Undecided</option>
-        </select>
+    <div class="field"><label for="living">Current living situation</label>
+      <select id="living" name="living" data-select-toggle="ownedHomeDetails"><option value="">Select one</option><option>Own current home</option><option>Rent</option><option>Live with family</option><option>Other</option></select>
+      <div class="conditional" id="ownedHomeDetails"><label for="current_home_plan">What are your plans for your current home?</label>
+        <select id="current_home_plan" name="current_home_plan"><option value="">Select one</option><option>Sell before purchasing</option><option>Sell after purchasing</option><option>Keep as an investment</option><option>Undecided</option></select>
       </div>
     </div>
     <div class="field"><label for="finance">Finance position</label><select id="finance" name="finance"><option value="">Select one</option><option>Pre-approved</option><option>In progress</option><option>Spoken with a broker or lender</option><option>Not started</option></select></div>
@@ -438,20 +280,22 @@ button{
     <div class="section-number">Assessment complete</div>
     <h2>Thank you</h2>
     <p>Your responses have been prepared for review ahead of the strategy session.</p>
-    <p class="smallprint">This prototype saves responses only in this browser. It does not transmit information to a server.</p>
-    <div class="submit-status" id="submitStatus"></div><div class="actions">
+    <p class="smallprint">Your completed responses are submitted for review. You can also download a JSON backup or create a PDF summary for your records.</p>
+    <div class="submit-status" id="submitStatus"></div>
+    <div class="actions">
       <button type="button" class="btn-primary" id="pdfBtn">Create PDF summary</button>
       <button type="button" class="btn-secondary" id="downloadBtn">Download JSON backup</button>
       <button type="button" class="btn-link" id="restartBtn">Start again</button>
     </div>
   </div>
 </section>
+
 </form>
 </main>
 </div>
 
 <script>
-const GOOGLE_SHEETS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyq83QHFlt9_Y20Z_ZHPycv_lKbL2sQkeJ2zJ0JdetUGB4oIOUK3NAXzvDmtWT9ifVPyQ/exec";
+const GOOGLE_SHEETS_WEB_APP_URL="https://script.google.com/macros/s/AKfycbyq83QHFlt9_Y20Z_ZHPycv_lKbL2sQkeJ2zJ0JdetUGB4oIOUK3NAXzvDmtWT9ifVPyQ/exec";
 
 const form=document.getElementById('assessmentForm');
 const sections=[...document.querySelectorAll('.section')];
@@ -476,6 +320,7 @@ function showSection(index){
   }
   window.scrollTo({top:document.querySelector('.progress-wrap').offsetTop,behavior:'smooth'});
 }
+
 document.querySelectorAll('.next').forEach(b=>b.addEventListener('click',()=>showSection(Math.min(current+1,8))));
 document.querySelectorAll('.back').forEach(b=>b.addEventListener('click',()=>showSection(Math.max(current-1,0))));
 
@@ -493,66 +338,50 @@ enforceMax('lifestyleOptions',5);
 function updateConditionals(){
   document.querySelectorAll('input[data-toggle]').forEach(input=>{
     const target=document.getElementById(input.dataset.toggle);
-    if(!target) return;
+    if(!target)return;
     const group=[...document.querySelectorAll(`input[name="${input.name}"]`)];
     const selected=group.find(x=>x.checked);
-    const show=selected && (selected.value==='Yes' || selected.value==='Unsure');
+    const show=selected&&(selected.value==='Yes'||selected.value==='Unsure');
     target.classList.toggle('show',!!show);
     target.querySelectorAll('input,textarea,select').forEach(el=>el.disabled=!show);
   });
 
   document.querySelectorAll('select[data-select-toggle]').forEach(select=>{
     const target=document.getElementById(select.dataset.selectToggle);
-    if(!target) return;
+    if(!target)return;
     const show=select.value==='Own current home';
     target.classList.toggle('show',show);
     target.querySelectorAll('input,textarea,select').forEach(el=>el.disabled=!show);
   });
 }
-document.querySelectorAll('[data-toggle],[data-select-toggle]').forEach(el=>{
-  el.addEventListener('change',()=>{updateConditionals();save();});
-});
+document.querySelectorAll('[data-toggle],[data-select-toggle]').forEach(el=>el.addEventListener('change',updateConditionals));
+updateConditionals();
 
 function collect(){
   const data={};
   new FormData(form).forEach((value,key)=>{
     if(data[key]!==undefined){
-      if(!Array.isArray(data[key])) data[key]=[data[key]];
+      if(!Array.isArray(data[key]))data[key]=[data[key]];
       data[key].push(value);
     }else data[key]=value;
   });
   data.submitted_at=new Date().toISOString();
   return data;
 }
-function save(){localStorage.setItem('familyDiscoveryDraft',JSON.stringify(collect()));}
-form.addEventListener('input',save);
-form.addEventListener('change',save);
-
-const saved=JSON.parse(localStorage.getItem('familyDiscoveryDraft')||'{}');
-Object.entries(saved).forEach(([name,value])=>{
-  const els=[...form.elements].filter(e=>e.name===name);
-  const vals=Array.isArray(value)?value:[value];
-  els.forEach(el=>{
-    if(el.type==='checkbox'||el.type==='radio') el.checked=vals.includes(el.value);
-    else if(name!=='submitted_at') el.value=value;
-  });
-});
-updateConditionals();
 
 async function submitToGoogleSheets(data){
-  if(!GOOGLE_SHEETS_WEB_APP_URL) return {configured:false};
+  if(!GOOGLE_SHEETS_WEB_APP_URL)return{configured:false};
   const response=await fetch(GOOGLE_SHEETS_WEB_APP_URL,{
     method:'POST',
     headers:{'Content-Type':'text/plain;charset=utf-8'},
     body:JSON.stringify(data)
   });
-  if(!response.ok) throw new Error(`Submission failed (${response.status})`);
-  return {configured:true};
+  if(!response.ok)throw new Error(`Submission failed (${response.status})`);
+  return{configured:true};
 }
 
 form.addEventListener('submit',async e=>{
   e.preventDefault();
-  save();
   submitStatus.textContent='Saving your responses…';
   submitStatus.className='submit-status';
   try{
@@ -561,23 +390,21 @@ form.addEventListener('submit',async e=>{
       submitStatus.textContent='Responses saved successfully.';
       submitStatus.className='submit-status success';
     }else{
-      submitStatus.textContent='Prototype mode: responses are saved only in this browser until the Google Sheets connection is activated.';
-      submitStatus.className='submit-status';
+      submitStatus.textContent='The online response connection is not configured.';
+      submitStatus.className='submit-status error';
     }
   }catch(err){
-    submitStatus.textContent='Your responses remain saved in this browser, but the online submission could not be completed.';
+    submitStatus.textContent='The online submission could not be completed. Please download the JSON backup before closing this page and contact us so we can confirm your responses were received.';
     submitStatus.className='submit-status error';
     console.error(err);
   }
   showSection(8);
 });
 
-function humanLabel(key){
-  return key.replace(/_/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
-}
+function humanLabel(key){return key.replace(/_/g,' ').replace(/\b\w/g,c=>c.toUpperCase())}
 function safe(value){
-  if(Array.isArray(value)) return value.join(', ');
-  return value===undefined || value==='' ? 'Not provided' : String(value);
+  if(Array.isArray(value))return value.join(', ');
+  return value===undefined||value===''?'Not provided':String(value);
 }
 function createSummaryHtml(data){
   const preferredOrder=[
@@ -588,7 +415,7 @@ function createSummaryHtml(data){
     'bedrooms','bathrooms','car_spaces','land_size','renovation','preferred_suburbs','excluded_suburbs',
     'success','anything_else'
   ];
-  const rows=preferredOrder.filter(k=>data[k]!==undefined && data[k]!=='' && !(Array.isArray(data[k])&&data[k].length===0))
+  const rows=preferredOrder.filter(k=>data[k]!==undefined&&data[k]!==''&&!(Array.isArray(data[k])&&data[k].length===0))
     .map(k=>`<tr><th>${humanLabel(k)}</th><td>${safe(data[k]).replace(/\n/g,'<br>')}</td></tr>`).join('');
   return `<!doctype html><html><head><meta charset="utf-8"><title>Family Discovery Assessment Summary</title>
   <style>
@@ -598,12 +425,11 @@ function createSummaryHtml(data){
   table{border-collapse:collapse;width:100%;font-size:12px}th,td{border-bottom:1px solid #e4e7ee;padding:10px 8px;vertical-align:top}
   th{width:30%;text-align:left;color:#03123d;background:#f8f6f0}td{width:70%}
   .note{margin-top:24px;color:#65708a;font-size:11px}
-  @media print{body{margin:16mm}.no-print{display:none}}
+  @media print{body{margin:16mm}}
   </style></head><body>
   <h1>Family Discovery Assessment</h1>
   <div class="meta">Response summary generated ${new Date().toLocaleString('en-AU')}</div>
-  <div class="rule"></div>
-  <table>${rows}</table>
+  <div class="rule"></div><table>${rows}</table>
   <p class="note">Use your browser’s Print command and choose “Save as PDF”.</p>
   <script>window.onload=()=>setTimeout(()=>window.print(),300);<\/script>
   </body></html>`;
@@ -612,9 +438,7 @@ function createSummaryHtml(data){
 document.getElementById('pdfBtn').addEventListener('click',()=>{
   const popup=window.open('','_blank');
   if(!popup){alert('Please allow pop-ups to create the PDF summary.');return;}
-  popup.document.open();
-  popup.document.write(createSummaryHtml(collect()));
-  popup.document.close();
+  popup.document.open();popup.document.write(createSummaryHtml(collect()));popup.document.close();
 });
 
 document.getElementById('downloadBtn').addEventListener('click',()=>{
@@ -625,12 +449,14 @@ document.getElementById('downloadBtn').addEventListener('click',()=>{
   a.click();
   URL.revokeObjectURL(a.href);
 });
+
 document.getElementById('restartBtn').addEventListener('click',()=>{
-  if(confirm('Clear all saved responses and start again?')){
-    localStorage.removeItem('familyDiscoveryDraft');form.reset();updateConditionals();showSection(0);
+  if(confirm('Clear these responses and start again?')){
+    form.reset();
+    updateConditionals();
+    showSection(0);
   }
 });
 </script>
 </body>
 </html>
-
