@@ -175,14 +175,21 @@ button{border:0;border-radius:9px;padding:12px 20px;font:inherit;font-weight:750
   <div class="section-number">Section 4 of 8</div><h2>Education</h2>
   <div class="why"><strong>Why we’re asking</strong>There is rarely one universally “best” school. The right choice depends on the child, the family and the wider life you are trying to create.</div>
   <div class="callout">Academic results are often the starting point, but families may also find that wellbeing, culture, travel time, friendships and co-curricular opportunities materially affect the right choice.</div>
-  <div class="field"><div class="question">Which education pathway are you currently considering?</div><div class="options two">
-    <label class="option"><input type="radio" name="pathway" value="Public"> Public</label>
-    <label class="option"><input type="radio" name="pathway" value="Private"> Private</label>
-    <label class="option"><input type="radio" name="pathway" value="Either"> Either</label>
-    <label class="option"><input type="radio" name="pathway" value="Unsure"> Unsure</label>
-  </div></div>
+  <div class="field"><div class="question">Which education pathways are you currently considering?</div><div class="help">Primary and secondary school can involve different choices. Select the option that best reflects your current thinking for each stage.</div>
+    <div class="grid">
+      <div>
+        <label for="primary_pathway">Primary school</label>
+        <select id="primary_pathway" name="primary_pathway"><option value="">Select one</option><option>Public</option><option>Private</option><option>Either</option><option>Unsure</option></select>
+      </div>
+      <div>
+        <label for="secondary_pathway">Secondary school</label>
+        <select id="secondary_pathway" name="secondary_pathway"><option value="">Select one</option><option>Public</option><option>Private</option><option>Either</option><option>Unsure</option></select>
+      </div>
+    </div>
+  </div>
   <div class="field"><div class="question">Which factors matter most to your family?</div><div class="help">Select up to five.</div><div class="options two" id="factorOptions">
     <label class="option"><input type="checkbox" name="education_factors" value="Academic outcomes"> Academic outcomes</label>
+    <label class="option"><input type="checkbox" name="education_factors" value="Balanced / well-rounded education"> Balanced / well-rounded education</label>
     <label class="option"><input type="checkbox" name="education_factors" value="Student wellbeing"> Student wellbeing</label>
     <label class="option"><input type="checkbox" name="education_factors" value="School culture and values"> School culture and values</label>
     <label class="option"><input type="checkbox" name="education_factors" value="Sport"> Sport</label>
@@ -410,7 +417,7 @@ function createSummaryHtml(data){
   const preferredOrder=[
     'purchasers','has_children','children_details','other_household','other_household_details',
     'family_changes_expected','changes','prompt','has_deadline','move_deadline','deadline_flexibility',
-    'journey','challenges','pathway','education_factors','has_school_shortlist','schools','living',
+    'journey','challenges','primary_pathway','secondary_pathway','education_factors','has_school_shortlist','schools','living',
     'current_home_plan','finance','budget','balance','lifestyle','locations','property_type',
     'bedrooms','bathrooms','car_spaces','land_size','renovation','preferred_suburbs','excluded_suburbs',
     'success','anything_else'
