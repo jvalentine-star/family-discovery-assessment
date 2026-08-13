@@ -139,8 +139,13 @@ button{border:0;border-radius:9px;padding:11px 18px;font:inherit;font-weight:750
 <section class="section" data-title="School Constraints">
 <div class="section-number">Section 3 of 7</div><h2>School Pathway & Enrolment</h2>
 <div class="why"><strong>Purpose</strong>Separate genuine non-negotiables from starting preferences so viable strategies are not excluded unnecessarily.</div>
-<div class="grid"><div class="field"><label for="school_pathway">Public / private preference</label><select id="school_pathway" name="school_pathway"><option value="">Select</option><option>Public</option><option>Private</option><option>Either</option><option>Unsure</option></select></div>
-<div class="field"><label for="school_pathway_flex">How fixed is that preference?</label><select id="school_pathway_flex" name="school_pathway_flex"><option value="">Select</option><option>Non-negotiable</option><option>Strong preference</option><option>Flexible</option></select></div></div>
+<h3>Primary school pathway</h3>
+<div class="grid"><div class="field"><label for="primary_school_pathway">Public / private preference</label><select id="primary_school_pathway" name="primary_school_pathway"><option value="">Select</option><option>Public</option><option>Private</option><option>Either</option><option>Unsure</option></select></div>
+<div class="field"><label for="primary_school_pathway_flex">How fixed is that preference?</label><select id="primary_school_pathway_flex" name="primary_school_pathway_flex"><option value="">Select</option><option>Non-negotiable</option><option>Strong preference</option><option>Flexible</option></select></div></div>
+<div class="field"><label for="primary_school_strategy_role">How important is primary school to the property/location decision?</label><select id="primary_school_strategy_role" name="primary_school_strategy_role"><option value="">Select</option><option>Major driver</option><option>Important consideration</option><option>Secondary consideration</option><option>Not a material driver</option><option>Unsure</option></select><div class="help">For example, a public primary catchment may matter now even if the family plans private secondary schooling later.</div></div>
+<h3>Secondary school pathway</h3>
+<div class="grid"><div class="field"><label for="secondary_school_pathway">Public / private preference</label><select id="secondary_school_pathway" name="secondary_school_pathway"><option value="">Select</option><option>Public</option><option>Private</option><option>Either</option><option>Unsure</option></select></div>
+<div class="field"><label for="secondary_school_pathway_flex">How fixed is that preference?</label><select id="secondary_school_pathway_flex" name="secondary_school_pathway_flex"><option value="">Select</option><option>Non-negotiable</option><option>Strong preference</option><option>Flexible</option></select></div></div>
 <div class="grid"><div class="field"><label for="gender_preference">Co-ed / single-sex preference</label><input id="gender_preference" name="gender_preference" type="text"></div>
 <div class="field"><label for="gender_flex">Flexibility</label><select id="gender_flex" name="gender_flex"><option value="">Select</option><option>Non-negotiable</option><option>Strong preference</option><option>Flexible</option></select></div></div>
 <div class="grid"><div class="field"><label for="faith_requirement">Faith / religious requirement</label><input id="faith_requirement" name="faith_requirement" type="text"></div>
@@ -228,7 +233,7 @@ button{border:0;border-radius:9px;padding:11px 18px;font:inherit;font-weight:750
 <script>
 const GOOGLE_SHEETS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyq83QHFlt9_Y20Z_ZHPycv_lKbL2sQkeJ2zJ0JdetUGB4oIOUK3NAXzvDmtWT9ifVPyQ/exec";
 const weights=[30,25,20,15,10];
-const defaultPriorityOptions=['Academic outcomes','Student wellbeing','School culture and values','Sport','Arts and music','Faith alignment','Learning support','Co-curricular opportunities','Transport and accessibility','Cost','STEM','Student leadership & personal development','Learning environment & facilities','Reputation / prestige','Alumni / network opportunities'];
+const defaultPriorityOptions=['Academic outcomes','Balanced / well-rounded education','Student wellbeing','School culture and values','Sport','Arts and music','Faith alignment','Learning support','Co-curricular opportunities','Transport and accessibility','Cost','STEM','Student leadership & personal development','Learning environment & facilities','Reputation / prestige','Alumni / network opportunities'];
 const extraFactors=['STEM','Student leadership & personal development','Learning environment & facilities','Reputation / prestige','Alumni / network opportunities','Faith / religious alignment'];
 const boundaryCategories=['School / education','School fees','Property','Budget','Location','Commute','Timing','Lifestyle'];
 const sections=[...document.querySelectorAll('.section')];
@@ -325,7 +330,8 @@ document.getElementById('importJson').addEventListener('change',async e=>{
     setVal('timing_requirement',discoveryData.move_deadline);
     setVal('timing_flexibility',discoveryData.deadline_flexibility);
     setVal('future_changes',discoveryData.changes);
-    setVal('school_pathway',discoveryData.pathway);
+    setVal('primary_school_pathway',discoveryData.primary_pathway || discoveryData.pathway);
+    setVal('secondary_school_pathway',discoveryData.secondary_pathway || discoveryData.pathway);
     setVal('preferred_schools',discoveryData.schools);
     setVal('purchase_budget',discoveryData.budget);
     setVal('property_type',discoveryData.property_type);
@@ -362,7 +368,7 @@ function collectForm(){
     version:'1.0',created_at:new Date().toISOString(),family_id:raw.family_id||'',
     family:{name:raw.family_name||'',session_date:raw.session_date||'',decision_driver:raw.decision_driver||'',five_year_success:raw.five_year_success||'',timing_requirement:raw.timing_requirement||'',timing_flexibility:raw.timing_flexibility||'',future_changes:raw.future_changes||''},
     education:{priorities,academic_focus:raw.academic_focus||'',arts_music_focus:raw.arts_music_focus||'',cocurricular_focus:normalise(raw.cocurricular_focus),wellbeing_meaning:raw.wellbeing_meaning||'',culture_meaning:raw.culture_meaning||'',learning_need:raw.learning_need||'',additional_factors:extras,red_flags:raw.school_red_flags||'',bonus_factors:raw.school_bonus_factors||''},
-    school_constraints:{pathway:raw.school_pathway||'',pathway_flexibility:raw.school_pathway_flex||'',gender_preference:raw.gender_preference||'',gender_flexibility:raw.gender_flex||'',faith_requirement:raw.faith_requirement||'',faith_flexibility:raw.faith_flex||'',preferred_schools:raw.preferred_schools||'',excluded_schools:raw.excluded_schools||'',max_fees:raw.max_school_fees||'',max_family_school_spend:raw.max_family_school_spend||'',fee_flexibility:raw.school_fee_flex||'',max_commute:raw.max_school_commute||'',commute_flexibility:raw.school_commute_flex||'',enrolment_notes:raw.enrolment_notes||''},
+    school_constraints:{primary_pathway:raw.primary_school_pathway||'',primary_pathway_flexibility:raw.primary_school_pathway_flex||'',primary_strategy_role:raw.primary_school_strategy_role||'',secondary_pathway:raw.secondary_school_pathway||'',secondary_pathway_flexibility:raw.secondary_school_pathway_flex||'',gender_preference:raw.gender_preference||'',gender_flexibility:raw.gender_flex||'',faith_requirement:raw.faith_requirement||'',faith_flexibility:raw.faith_flex||'',preferred_schools:raw.preferred_schools||'',excluded_schools:raw.excluded_schools||'',max_fees:raw.max_school_fees||'',max_family_school_spend:raw.max_family_school_spend||'',fee_flexibility:raw.school_fee_flex||'',max_commute:raw.max_school_commute||'',commute_flexibility:raw.school_commute_flex||'',enrolment_notes:raw.enrolment_notes||''},
     property:{budget:raw.purchase_budget||'',budget_flexibility:raw.budget_flex||'',property_type:raw.property_type||'',property_type_flexibility:raw.property_type_flex||'',bedrooms:raw.bedrooms||'',bathrooms:raw.bathrooms||'',car_spaces:raw.car_spaces||'',land_outdoor:raw.land_outdoor||'',land_flexibility:raw.land_flex||'',renovation_tolerance:raw.renovation_tolerance||'',preferred_areas:raw.preferred_areas||'',excluded_areas:raw.excluded_areas||'',other_criteria:raw.other_property_criteria||''},
     location_lifestyle:{destinations,lifestyle_notes:raw.lifestyle_notes||''},
     financial_tradeoffs:{budget_firmness:raw.budget_firmness||'',private_school_tradeoff:raw.private_school_tradeoff||'',public_zone_tradeoff:raw.public_zone_tradeoff||'',fee_tipping_point:raw.fee_tipping_point||'',current_home_strategy:raw.current_home_strategy||'',finance_constraints:raw.finance_constraints||'',hardest_tradeoff:raw.hardest_tradeoff||''},
@@ -386,8 +392,11 @@ ${d.family.five_year_success}
 Ranked education priorities
 ${p||'Not completed'}
 
-School pathway
-${d.school_constraints.pathway} (${d.school_constraints.pathway_flexibility})
+Primary school pathway
+${d.school_constraints.primary_pathway} (${d.school_constraints.primary_pathway_flexibility}); strategy role: ${d.school_constraints.primary_strategy_role}
+
+Secondary school pathway
+${d.school_constraints.secondary_pathway} (${d.school_constraints.secondary_pathway_flexibility})
 Maximum school fees: ${d.school_constraints.max_fees}
 Maximum school commute: ${d.school_constraints.max_commute}
 
