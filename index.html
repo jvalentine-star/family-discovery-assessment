@@ -376,15 +376,45 @@ function collect(){
   return data;
 }
 
+function getDiscoverySubmissionId(){
+  let id=sessionStorage.getItem('familyDiscoverySubmissionId');
+
+  if(!id){
+    id=crypto.randomUUID
+      ? crypto.randomUUID()
+      : `submission-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+
+    sessionStorage.setItem('familyDiscoverySubmissionId',id);
+  }
+
+  return id;
+}
+
 async function submitToGoogleSheets(data){
   if(!GOOGLE_SHEETS_WEB_APP_URL)return{configured:false};
+
   const response=await fetch(GOOGLE_SHEETS_WEB_APP_URL,{
     method:'POST',
     headers:{'Content-Type':'text/plain;charset=utf-8'},
-    body:JSON.stringify(data)
+    body:JSON.stringify({
+      action:'discovery_submit',
+      submission_id:getDiscoverySubmissionId(),
+      data:data
+    })
   });
-  if(!response.ok)throw new Error(`Submission failed (${response.status})`);
-  return{configured:true};
+
+  const result=await response.json();
+
+  if(!response.ok || !result.ok){
+    throw new Error(result.error || `Submission failed (${response.status})`);
+  }
+
+  return{
+    configured:true,
+    family_id:result.family_id,
+    strategy_url:result.strategy_url,
+    duplicate:result.duplicate
+  };
 }
 
 form.addEventListener('submit',async e=>{
@@ -394,7 +424,8 @@ form.addEventListener('submit',async e=>{
   try{
     const result=await submitToGoogleSheets(collect());
     if(result.configured){
-      submitStatus.textContent='Responses saved successfully.';
+submitStatus.textContent=
+  `Responses saved successfully. Family ID: ${result.family_id}`;
       submitStatus.className='submit-status success';
     }else{
       submitStatus.textContent='The online response connection is not configured.';
