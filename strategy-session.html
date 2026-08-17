@@ -61,7 +61,7 @@ button{border:0;border-radius:9px;padding:11px 18px;font:inherit;font-weight:750
 <div class="kicker">Family Strategy Session</div>
 <h1>Family Priorities & Decision Criteria</h1>
 <p class="intro">A guided working session to turn your family’s education, property, financial and lifestyle goals into clear decision criteria.</p>
-<div class="cover-card"><strong>Designed to complete together during the strategy meeting.</strong><br>Import the Family Discovery Assessment first where available, then clarify priorities, non-negotiables and trade-offs.</div>
+<div class="cover-card"><strong>Designed to complete together during the strategy meeting.</strong><br>Existing Family Discovery information will load automatically where available, then use this session to clarify priorities, non-negotiables and trade-offs.</div>
 </div>
 <div class="cover-footer"><span>Strategy session working document</span><span>Version 1.0</span></div>
 </section>
@@ -77,8 +77,10 @@ button{border:0;border-radius:9px;padding:11px 18px;font:inherit;font-weight:750
 <section class="section active" data-title="Family Decision">
 <div class="section-number">Section 1 of 7</div><h2>Confirm the Family Decision</h2>
 <div class="why"><strong>Purpose</strong>Start with the Family Discovery Assessment. Confirm what has changed and clarify the decision this strategy must solve.</div>
-<div id="importBlock" class="callout warn"><strong>Have the Family Discovery JSON file?</strong><br>Import it here to pre-fill information already collected. Nothing is uploaded anywhere; the file is read only in this browser.
-<div style="margin-top:12px"><input type="file" id="importJson" accept="application/json,.json"></div><div id="importStatus" class="status"></div></div>
+<div id="importBlock" class="callout">
+  <strong>Family Discovery Assessment</strong><br>
+  <span id="importStatus">Loading existing family information...</span>
+</div>
 <div class="grid">
 <div class="field"><label for="family_name">Family / purchasers</label><input id="family_name" name="family_name" type="text"></div>
 <div class="field"><label for="session_date">Strategy session date</label><input id="session_date" name="session_date" type="date"></div>
@@ -222,7 +224,7 @@ button{border:0;border-radius:9px;padding:11px 18px;font:inherit;font-weight:750
 </div>
 <div id="finalStatus" class="status"></div>
 <h3>Session summary</h3><div id="summaryBox" class="summary"></div>
-<p class="smallprint">This prototype stores data only in this browser unless you download or print it. No information is transmitted to a server.</p>
+<p class="smallprint">This strategy session is saved to the secure Family Assessment record and linked to the original Discovery Assessment using the Family ID.</p>
 </div>
 </section>
 
@@ -231,8 +233,8 @@ button{border:0;border-radius:9px;padding:11px 18px;font:inherit;font-weight:750
 </div>
 
 <script>
-const GOOGLE_SHEETS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyq83QHFlt9_Y20Z_ZHPycv_lKbL2sQkeJ2zJ0JdetUGB4oIOUK3NAXzvDmtWT9ifVPyQ/exec";
-const weights=[30,25,20,15,10];
+const GOOGLE_SHEETS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbysV3uUOpF4vCzW_k_e0vYMzcpX8EQRAHJ4ChUoNjv63wkHPJskB6lw67JHyFl6rQSMcw/exec";
+  const weights=[30,25,20,15,10];
 const defaultPriorityOptions=['Academic outcomes','Balanced / well-rounded education','Student wellbeing','School culture and values','Sport','Arts and music','Faith alignment','Learning support','Co-curricular opportunities','Transport and accessibility','Cost','STEM','Student leadership & personal development','Learning environment & facilities','Reputation / prestige','Alumni / network opportunities'];
 const extraFactors=['STEM','Student leadership & personal development','Learning environment & facilities','Reputation / prestige','Alumni / network opportunities','Faith / religious alignment'];
 const boundaryCategories=['School / education','School fees','Property','Budget','Location','Commute','Timing','Lifestyle'];
@@ -319,38 +321,104 @@ function createBoundaries(){
 function normalise(val){if(Array.isArray(val))return val;if(val==null||val==='')return[];return [val]}
 function setVal(id,val){const el=document.getElementById(id);if(el&&val!=null)el.value=Array.isArray(val)?val.join(', '):val}
 
-document.getElementById('importJson').addEventListener('change',async e=>{
-  const f=e.target.files[0]; if(!f)return;
-  try{
-    discoveryData=JSON.parse(await f.text());
-    setVal('family_id',discoveryData.family_id);
-    setVal('family_name',discoveryData.purchasers);
-    setVal('decision_driver',discoveryData.prompt);
-    setVal('five_year_success',discoveryData.success);
-    setVal('timing_requirement',discoveryData.move_deadline);
-    setVal('timing_flexibility',discoveryData.deadline_flexibility);
-    setVal('future_changes',discoveryData.changes);
-    setVal('primary_school_pathway',discoveryData.primary_pathway || discoveryData.pathway);
-    setVal('secondary_school_pathway',discoveryData.secondary_pathway || discoveryData.pathway);
-    setVal('preferred_schools',discoveryData.schools);
-    setVal('purchase_budget',discoveryData.budget);
-    setVal('property_type',discoveryData.property_type);
-    setVal('bedrooms',discoveryData.bedrooms);
-    setVal('bathrooms',discoveryData.bathrooms);
-    setVal('car_spaces',discoveryData.car_spaces);
-    setVal('land_outdoor',discoveryData.land_size);
-    setVal('renovation_tolerance',discoveryData.renovation);
-    setVal('preferred_areas',discoveryData.preferred_suburbs);
-    setVal('excluded_areas',discoveryData.excluded_suburbs);
-    setVal('lifestyle_notes',normalise(discoveryData.lifestyle).join(', '));
-    setVal('current_home_strategy',discoveryData.current_home_plan);
-    createRanking(normalise(discoveryData.education_factors).slice(0,5));
-    if(discoveryData.locations)addDestination('Important locations','',discoveryData.locations,'');
-    document.getElementById('importStatus').textContent='Discovery Assessment imported successfully. Please review and refine the pre-filled information.';
-  }catch(err){
-    document.getElementById('importStatus').textContent='Could not read that JSON file. Please check it is the backup downloaded from the Family Discovery Assessment.';
+const urlParams = new URLSearchParams(window.location.search);
+const activeFamilyId = urlParams.get('family') || '';
+const activeFamilyKey = urlParams.get('key') || '';
+
+async function loadDiscoveryAutomatically(){
+  if(!activeFamilyId || !activeFamilyKey){
+    document.getElementById('importStatus').textContent =
+      'No family record was supplied. Please open this questionnaire using the Strategy Session link from the Family Assessment Responses sheet.';
+    return;
   }
-});
+
+  try{
+    document.getElementById('importStatus').textContent =
+      'Loading existing Discovery Assessment...';
+
+    const url =
+      GOOGLE_SHEETS_WEB_APP_URL +
+      '?action=load_discovery' +
+      '&family_id=' + encodeURIComponent(activeFamilyId) +
+      '&token=' + encodeURIComponent(activeFamilyKey);
+
+    const response = await fetch(url);
+    const result = await response.json();
+
+    if(!result.ok){
+      throw new Error(result.error || 'Could not load family record');
+    }
+
+    discoveryData = result.discovery || {};
+
+    setVal('family_id', result.family_id);
+    setVal('family_name', discoveryData.purchasers);
+    setVal('decision_driver', discoveryData.prompt);
+    setVal('five_year_success', discoveryData.success);
+    setVal('timing_requirement', discoveryData.move_deadline);
+    setVal('timing_flexibility', discoveryData.deadline_flexibility);
+    setVal('future_changes', discoveryData.changes);
+
+    setVal(
+      'primary_school_pathway',
+      discoveryData.primary_pathway || discoveryData.pathway
+    );
+
+    setVal(
+      'secondary_school_pathway',
+      discoveryData.secondary_pathway || discoveryData.pathway
+    );
+
+    setVal(
+      'preferred_schools',
+      discoveryData.schools || discoveryData.school_shortlist
+    );
+
+    setVal('purchase_budget', discoveryData.budget);
+    setVal('property_type', discoveryData.property_type);
+    setVal('bedrooms', discoveryData.bedrooms);
+    setVal('bathrooms', discoveryData.bathrooms);
+    setVal('car_spaces', discoveryData.car_spaces);
+    setVal('land_outdoor', discoveryData.land_size);
+    setVal('renovation_tolerance', discoveryData.renovation);
+    setVal('preferred_areas', discoveryData.preferred_suburbs);
+    setVal('excluded_areas', discoveryData.excluded_suburbs);
+
+    setVal(
+      'lifestyle_notes',
+      normalise(discoveryData.lifestyle).join(', ')
+    );
+
+    setVal(
+      'current_home_strategy',
+      discoveryData.current_home_plan
+    );
+
+    createRanking(
+      normalise(discoveryData.education_factors).slice(0,5)
+    );
+
+    if(discoveryData.locations){
+      addDestination(
+        'Important locations',
+        '',
+        discoveryData.locations,
+        ''
+      );
+    }
+
+    document.getElementById('importStatus').textContent =
+      'Discovery Assessment loaded automatically. Please review and refine the pre-filled information.';
+
+  }catch(err){
+    console.error(err);
+
+    document.getElementById('importStatus').textContent =
+      'The Discovery Assessment could not be loaded automatically. Please contact Justin rather than entering the information again.';
+  }
+}
+
+loadDiscoveryAutomatically();
 
 function collectForm(){
   const fd=new FormData(document.getElementById('strategyForm')),raw={};
@@ -421,12 +489,28 @@ ${d.advisor_notes}`;
 }
 async function submitToGoogleSheets(data){
   if(!GOOGLE_SHEETS_WEB_APP_URL) return {configured:false};
-  await fetch(GOOGLE_SHEETS_WEB_APP_URL,{
+
+  data.family_id = activeFamilyId || data.family_id || '';
+  data.source_discovery_imported = Object.keys(discoveryData || {}).length > 0;
+
+  const response = await fetch(GOOGLE_SHEETS_WEB_APP_URL,{
     method:'POST',
     headers:{'Content-Type':'text/plain;charset=utf-8'},
-    body:JSON.stringify(data)
+    body:JSON.stringify({
+      action:'strategy_submit',
+      family_id:activeFamilyId,
+      token:activeFamilyKey,
+      data:data
+    })
   });
-  return {configured:true};
+
+  const result = await response.json();
+
+  if(!result.ok){
+    throw new Error(result.error || 'Could not save strategy session');
+  }
+
+  return {configured:true, ...result};
 }
 document.getElementById('strategyForm').addEventListener('submit',async e=>{
   e.preventDefault();
