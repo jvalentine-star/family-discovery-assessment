@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Family Discovery Assessment</title>
+<title>Family Discovery Session</title>
 <style>
 :root{
   --navy:#03123d;--blue:#05206e;--gold:#c7ae6a;--gold-light:#d5c28f;
@@ -67,8 +67,8 @@ button{border:0;border-radius:9px;padding:12px 20px;font:inherit;font-weight:750
 <section class="cover">
   <div>
     <div class="kicker">Family Strategy Assessment</div>
-    <h1>Family Discovery Assessment</h1>
-    <p class="intro">A thoughtful first step towards aligning your family’s education, lifestyle, financial and property decisions.</p>
+    <h1>Family Discovery Session</h1>
+    <p class="intro">A guided first-stage conversation to understand your family, schooling, property and lifestyle context.</p>
     <div class="cover-card"><strong>Estimated completion time: 10 minutes</strong><br>Your answers will help shape a more focused and useful strategy session.</div>
   </div>
   <div class="cover-footer"><span>Prepared for your family</span><span>Confidential discovery questionnaire</span></div>
@@ -455,7 +455,7 @@ function createSummaryHtml(data){
   ];
   const rows=preferredOrder.filter(k=>data[k]!==undefined&&data[k]!==''&&!(Array.isArray(data[k])&&data[k].length===0))
     .map(k=>`<tr><th>${humanLabel(k)}</th><td>${safe(data[k]).replace(/\n/g,'<br>')}</td></tr>`).join('');
-  return `<!doctype html><html><head><meta charset="utf-8"><title>Family Discovery Assessment Summary</title>
+  return `<!doctype html><html><head><meta charset="utf-8"><title>Family Discovery Session Summary</title>
   <style>
   body{font-family:Arial,Helvetica,sans-serif;color:#172033;margin:36px;line-height:1.45}
   h1{font-family:Georgia,'Times New Roman',serif;color:#03123d;font-size:34px;margin-bottom:6px}
@@ -465,7 +465,7 @@ function createSummaryHtml(data){
   .note{margin-top:24px;color:#65708a;font-size:11px}
   @media print{body{margin:16mm}}
   </style></head><body>
-  <h1>Family Discovery Assessment</h1>
+  <h1>Family Discovery Session</h1>
   <div class="meta">Response summary generated ${new Date().toLocaleString('en-AU')}</div>
   <div class="rule"></div><table>${rows}</table>
   <p class="note">Use your browser’s Print command and choose “Save as PDF”.</p>
