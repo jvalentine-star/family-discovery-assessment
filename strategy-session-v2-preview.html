@@ -376,7 +376,7 @@ document.getElementById('addDestination').addEventListener('click',()=>addDestin
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
 function escapeAttr(s){return escapeHtml(s)}
 function normalise(v){if(Array.isArray(v))return v;if(v==null||v==='')return[];return [v]}
-function setVal(id,val){const el=document.getElementById(id);if(el&&val!=null)el.value=Array.isArray(val)?val.join(', '):val}
+function setVal(id,val){const el=document.getElementById(id);if(el&&val!=null)el.value=Array.isArray(val)?val.join(', '):val}\nfunction firstNumericValue(val){const match=String(val||'').replace(/,/g,'').match(/\d+(?:\.\d+)?/);return match?match[0]:''}
 
 const urlParams=new URLSearchParams(window.location.search);
 const activeFamilyId=urlParams.get('family')||'';
@@ -399,7 +399,7 @@ async function loadDiscoveryAutomatically(){
     if(stage)setVal('school_stage_scope',stage);
     const pathway=discoveryData.secondary_pathway||discoveryData.primary_pathway||'';
     const pathMap={'Public':'Government','Private':'Independent','Either':'Open to government or non-government','Unsure':'Unsure'};if(pathMap[pathway])setVal('school_sector_preference',pathMap[pathway]);
-    setVal('preferred_schools',discoveryData.schools||discoveryData.school_shortlist);setVal('property_type',normalise(discoveryData.property_type)[0]||'');setVal('bedrooms_min',discoveryData.bedrooms);setVal('bathrooms_min',discoveryData.bathrooms);setVal('parking_min',discoveryData.car_spaces);setVal('land_minimum',String(discoveryData.land_size||'').replace(/[^0-9.]/g,''));setVal('preferred_areas',discoveryData.preferred_suburbs);setVal('excluded_areas',discoveryData.excluded_suburbs);setVal('lifestyle_priorities',normalise(discoveryData.lifestyle).join(', '));setVal('current_home_strategy',discoveryData.current_home_plan);
+    setVal('preferred_schools',discoveryData.schools||discoveryData.school_shortlist);setVal('property_type',normalise(discoveryData.property_type)[0]||'');setVal('bedrooms_min',discoveryData.bedrooms);setVal('bathrooms_min',discoveryData.bathrooms);setVal('parking_min',discoveryData.car_spaces);setVal('land_minimum',firstNumericValue(discoveryData.land_size));setVal('preferred_areas',discoveryData.preferred_suburbs);setVal('excluded_areas',discoveryData.excluded_suburbs);setVal('lifestyle_priorities',normalise(discoveryData.lifestyle).join(', '));setVal('current_home_strategy',discoveryData.current_home_plan);
     if(discoveryData.children_details){document.getElementById('discoveryChildren').style.display='block';document.getElementById('discoveryChildren').innerHTML='<strong>Discovery children details</strong><br>'+escapeHtml(discoveryData.children_details);createChild(discoveryData.children_details)}else createChild();
     if(discoveryData.locations)addDestination('Important locations from Discovery');
     document.getElementById('importStatus').textContent='Discovery Session loaded. Please confirm or refine the information rather than re-entering it unnecessarily.';
