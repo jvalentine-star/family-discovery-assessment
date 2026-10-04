@@ -557,7 +557,7 @@ document.getElementById('printBtn').addEventListener('click',()=>window.print())
 document.getElementById('copyBtn').addEventListener('click',async()=>{await navigator.clipboard.writeText(document.getElementById('summaryBox').textContent);document.getElementById('finalStatus').textContent='Summary copied to clipboard.'});
 document.getElementById('restartBtn').addEventListener('click',()=>{if(confirm('Clear this preview and start again?'))location.reload()});
 
-createCriteria();createChild();addInterest();addDestination('Workplace');addDestination('Grandparents / support network');updateFaithConditional();loadDiscoveryAutomatically();
+createCriteria();addInterest();addDestination('Workplace');addDestination('Grandparents / support network');updateFaithConditional();loadDiscoveryAutomatically();
 </script>
 </body>
 </html>
