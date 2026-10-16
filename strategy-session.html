@@ -376,7 +376,8 @@ document.getElementById('addDestination').addEventListener('click',()=>addDestin
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
 function escapeAttr(s){return escapeHtml(s)}
 function normalise(v){if(Array.isArray(v))return v;if(v==null||v==='')return[];return [v]}
-function setVal(id,val){const el=document.getElementById(id);if(el&&val!=null)el.value=Array.isArray(val)?val.join(', '):val}\nfunction firstNumericValue(val){const match=String(val||'').replace(/,/g,'').match(/\d+(?:\.\d+)?/);return match?match[0]:''}
+function setVal(id,val){const el=document.getElementById(id);if(el&&val!=null)el.value=Array.isArray(val)?val.join(', '):val}
+function firstNumericValue(val){const match=String(val||'').replace(/,/g,'').match(/\d+(?:\.\d+)?/);return match?match[0]:''}
 
 const urlParams=new URLSearchParams(window.location.search);
 const activeFamilyId=urlParams.get('family')||'';
