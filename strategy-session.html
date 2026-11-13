@@ -318,38 +318,53 @@ function createChild(prefill=''){
 }
 document.getElementById('addChild').addEventListener('click',()=>createChild());
 
+// v2.1 wording (14 Nov 2026): each rated priority uses the same name as a School Profile rating, so it can be measured.
+// Priorities we cannot measure from published information are not rated; families tell us what to explore at school tours.
 const criteria=[
-['Academic Excellence','What does this mean to you: results, pathways, expectations, peer environment, improvement over time, high-achievement culture, or something else?'],
-['Academic Opportunity & Extension','Acceleration, enrichment, subject breadth, ability grouping, competitions, differentiated teaching or access to advanced learning?'],
-['Student Wellbeing','Feeling known and supported, pastoral care, belonging, bullying management, counselling, teacher relationships, transition support?'],
-['Learning Support & Inclusion','Support for learning difficulties, neurodiversity, disability/accessibility, intervention, individual learning plans or inclusive teaching?'],
-['Community, Culture & Values','Behaviour expectations, respect, discipline, peer culture, diversity, family community, values, social environment or belonging?'],
-['Breadth of Co-curricular Opportunities','School-wide breadth such as clubs, camps, service, outdoor education, competitions, excursions or international opportunities.'],
-['Leadership & Personal Development','Leadership roles, independence, confidence, responsibility, character, service, resilience or personal growth?'],
-['Learning Environment & Facilities','Only facilities or environments that genuinely matter to your child or family.'],
-['Reputation / Standing','Academic standing, prestige, community perception, selectivity, peer group, or something else?'],
-['Alumni / Future Network','Community connections, mentoring, professional networks, alumni involvement, or something else?']
+['Academic Performance (results)','What does this mean to you: VCE results, pathways, high-achievement culture, improvement over time? (Measured by VCE median study score, share of 40+ scores and trend.)',true],
+['Academic Opportunity & Extension','Acceleration, university extension studies, languages, subject range, access to advanced learning? (Measured by acceleration, university extension and three or more languages.)',true],
+['Student Wellbeing','Feeling known and supported, pastoral care, belonging, counselling, transition support? (Measured by what the school provides; published outcomes are shown beside it.)',true],
+['Learning Support & Inclusion','Support for learning difficulties, neurodiversity, disability, English as an additional language, high-ability programs?',true],
+['Culture & Community','Behaviour expectations, respect, values, house or mentor system, service, student leadership structure, belonging?',true],
+['Co-curricular Breadth (music, sport, arts, STEM)','Strength across music, sport, arts and STEM together. If one area matters most for a child, add it below as a specific interest instead.',true],
+['Facilities','Only facilities that genuinely matter to your child or family.',true],
+['Leadership & Personal Development','Not rated: we cannot measure this from published information. What would you want us to find out at school tours?',false],
+['Reputation / Standing','Not rated: we do not rank schools. If reputation means results, opportunity or culture, rate that priority above. Otherwise, what would you want us to find out at school tours?',false],
+['Alumni / Future Network','Not rated: we cannot measure network strength from published information. What would you want us to know (old-scholar community, mentoring, careers links)?',false]
 ];
 function createCriteria(){
   const area=document.getElementById('criteriaArea');
   criteria.forEach((c,i)=>{
     const div=document.createElement('div');div.className='criteria-card';
-    div.innerHTML=`<div class="criteria-head"><div><strong>${c[0]}</strong></div><div><label>Importance</label><select name="criterion_${i}_importance">${optionHtml(importanceOptions)}</select></div><div><label>Flexibility</label><select name="criterion_${i}_flexibility">${optionHtml(flexibilityOptions)}</select></div></div>
+    if(c[2]){
+      div.innerHTML=`<div class="criteria-head"><div><strong>${c[0]}</strong></div><div><label>Importance</label><select name="criterion_${i}_importance">${optionHtml(importanceOptions)}</select></div><div><label>Flexibility</label><select name="criterion_${i}_flexibility">${optionHtml(flexibilityOptions)}</select></div></div>
     <div class="field" style="margin:12px 0 0"><label>What specifically matters?</label><textarea name="criterion_${i}_notes" class="compact" placeholder="${c[1]}"></textarea></div>`;
+    }else{
+      div.innerHTML=`<div class="criteria-head"><div><strong>${c[0]}</strong></div><div><label>Importance</label><div class="help">Not rated: explored at school tours</div></div></div>
+    <div class="field" style="margin:12px 0 0"><label>${c[1]}</label><textarea name="criterion_${i}_notes" class="compact"></textarea></div>`;
+    }
     area.appendChild(div);
   });
+  const warn=document.createElement('div');warn.id='veryImportantWarning';warn.className='help';warn.style.cssText='display:none;color:#a3361f;font-weight:600;margin-top:10px';area.appendChild(warn);
 }
+function updateVeryImportantWarning(){
+  const n=[...document.querySelectorAll('select[name$="_importance"]')].filter(sel=>sel.value==='Very important').length;
+  const w=document.getElementById('veryImportantWarning');if(!w)return;
+  if(n>5){w.style.display='block';w.textContent=`${n} items are rated Very important. Please keep it to 5 or fewer: if you could only protect three, which would they be?`;}
+  else{w.style.display='none';w.textContent='';}
+}
+document.addEventListener('change',e=>{if(e.target&&e.target.name&&/_importance$/.test(e.target.name))updateVeryImportantWarning();});
 
 function addInterest(){
   const idx=interestCounter++,area=document.getElementById('interestRows'),div=document.createElement('div');div.className='card interest-row';
   div.innerHTML=`<div class="grid3">
   <div class="field"><label>Child</label><input name="interest_${idx}_child" type="text"></div>
-  <div class="field"><label>Specific interest / opportunity</label><select name="interest_${idx}_area"><option value="">Select</option><option>Sport</option><option>Mathematics</option><option>Science</option><option>STEM</option><option>Technology / Computing</option><option>Music</option><option>Performing Arts / Drama</option><option>Visual Arts</option><option>Languages</option><option>Debating / Public Speaking</option><option>Leadership</option><option>Cadets</option><option>Outdoor Education</option><option>Academic Competitions</option><option>Business / Entrepreneurship</option><option>Community Service</option><option>Other</option></select></div>
+  <div class="field"><label>Specific interest / opportunity</label><select name="interest_${idx}_area"><option value="">Select</option><option>Music</option><option>Sport</option><option>Arts & Drama</option><option>STEM</option><option>Academic Extension</option><option>Languages</option><option>Learning Support</option><option>Other (explored at school tours)</option></select></div>
   <div class="field"><label>Importance</label><select name="interest_${idx}_importance">${optionHtml(importanceOptions)}</select></div>
   </div>
   <div class="grid">
   <div class="field"><label>Flexibility</label><select name="interest_${idx}_flexibility">${optionHtml(flexibilityOptions)}</select></div>
-  <div class="field"><label>What would a good school need to offer?</label><input name="interest_${idx}_notes" type="text"></div>
+  <div class="field"><label>What would a good school need to offer? (For a particular sport, instrument or activity, name it here.)</label><input name="interest_${idx}_notes" type="text"></div>
   </div>
   <button type="button" class="btn-link remove-interest">Remove</button>`;
   area.appendChild(div);div.querySelector('.remove-interest').addEventListener('click',()=>div.remove());
@@ -424,7 +439,7 @@ function collectRaw(){
 function collectForm(){
   const raw=collectRaw();
   const children=[...document.querySelectorAll('.child-card')].map((row,i)=>({name:raw[`child_${i}_name`]||'',year:raw[`child_${i}_year`]||'',current_school:raw[`child_${i}_school`]||'',academic_strengths:raw[`child_${i}_academic_strengths`]||'',extension_need:raw[`child_${i}_extension`]||'',learning_support_need:raw[`child_${i}_support`]||'',wellbeing_profile:raw[`child_${i}_wellbeing`]||'',interests:raw[`child_${i}_interests`]||''})).filter(x=>Object.values(x).some(Boolean));
-  const core_priorities=criteria.map((c,i)=>({criterion:c[0],importance:raw[`criterion_${i}_importance`]||'',flexibility:raw[`criterion_${i}_flexibility`]||'',notes:raw[`criterion_${i}_notes`]||''}));
+  const core_priorities=criteria.map((c,i)=>({criterion:c[0],importance:c[2]?(raw[`criterion_${i}_importance`]||''):'Not rated',flexibility:raw[`criterion_${i}_flexibility`]||'',notes:raw[`criterion_${i}_notes`]||''}));
   const child_specific_priorities=[...document.querySelectorAll('.interest-row')].map((row,i)=>({child:raw[`interest_${i}_child`]||'',area:raw[`interest_${i}_area`]||'',importance:raw[`interest_${i}_importance`]||'',flexibility:raw[`interest_${i}_flexibility`]||'',notes:raw[`interest_${i}_notes`]||''})).filter(x=>x.child||x.area);
   const destinations=[...document.querySelectorAll('.destination-row')].map((row,i)=>({name:raw[`destination_${i}_name`]||'',reason_frequency:raw[`destination_${i}_reason`]||'',mode:raw[`destination_${i}_mode`]||'',ideal_minutes:raw[`destination_${i}_ideal`]||'',max_minutes:raw[`destination_${i}_max`]||'',flexibility:raw[`destination_${i}_flexibility`]||''})).filter(x=>x.name);
   return{
